@@ -10,6 +10,10 @@ import {
 } from 'react-native';
 import { styles } from './style/BottomComponent';
 export default class BottomComponent extends Component {
+    constructor(props){
+        super(props);
+        
+    }
     // renderItems(rowData) {
     //     return (
     //         <View style={styles.rowBox}>
@@ -48,13 +52,16 @@ export default class BottomComponent extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.rowBox}>
-                    <View style={styles.rowItem}>
-                        <Image style={styles.rowImage} source={require('../img/Home.png')} />
-                        <View style={styles.rowContentBox}>
-                            <Text style={styles.rowContentTitle}>Detailed parameters</Text>
-                            <Text style={styles.rowContent}>水族箱详细参数</Text>
+                
+                    <TouchableHighlight style={styles.rowItem} onPress={()=>this.props.navigation.navigate('enviromentDetail')}>
+                        <View>
+                            <Image style={styles.rowImage} source={require('../img/Home.png')} />
+                            <View style={styles.rowContentBox}>
+                                <Text style={styles.rowContentTitle}>Detailed parameters</Text>
+                                <Text style={styles.rowContent}>水族箱详细参数</Text>
+                            </View>
                         </View>
-                    </View>
+                    </TouchableHighlight>
                     <View style={styles.rowItem}>
                         <Image style={styles.rowImage} source={require('../img/fishTank.png')} />
                         <View style={styles.rowContentBox}>

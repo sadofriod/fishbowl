@@ -12,12 +12,15 @@ export default class enviroment extends Component {
         super(props);
         StatusBar.setBackgroundColor('#13c4a3',true);
     }
+    static navigationOptions = {
+        header:null
+    }
     render(){
         return(
             <View>
                 <StatusBar/>                
                 <Top/>
-                <Bottom/>
+                <Bottom navigation={this.props.navigation}/>
                 <Float/>
             </View>
         )

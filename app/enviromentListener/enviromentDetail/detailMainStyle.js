@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
         flex: 2,
         justifyContent: 'center',
         alignItems: 'center',
-        flexWarp:'warp',
+        flexWrap:'wrap',
         flexDirection: 'row',
     }
 })

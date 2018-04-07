@@ -4359,6 +4359,14 @@ react-native-safe-area-view@^0.7.0:
   dependencies:
     prop-types "^15.6.0"
 
+react-native-webrtc@^1.58.3:
+  version "1.58.3"
+  resolved "http://registry.npm.taobao.org/react-native-webrtc/download/react-native-webrtc-1.58.3.tgz#4d4f4f057ccf1ec25f985c63ada6c4a1b44e5c49"
+  dependencies:
+    base64-js "^1.1.2"
+    event-target-shim "^1.0.5"
+    prop-types "^15.5.10"
+
 react-native@0.54.4:
   version "0.54.4"
   resolved "http://registry.npm.taobao.org/react-native/download/react-native-0.54.4.tgz#19c6c598f6acf04f1c032fe9a1812f0c640fa8b7"
@@ -5297,10 +5305,6 @@ tr46@^1.0.0:
 trim-right@^1.0.1:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/trim-right/download/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
-
-tty@^1.0.1:
-  version "1.0.1"
-  resolved "http://registry.npm.taobao.org/tty/download/tty-1.0.1.tgz#e4409ac98b0dd1c50b59ff38e86eac3f0764ee45"
 
 tunnel-agent@^0.6.0:
   version "0.6.0"
