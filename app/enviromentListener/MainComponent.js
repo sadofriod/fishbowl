@@ -18,7 +18,7 @@ export default class enviroment extends Component {
     render(){
         return(
             <View>
-                <StatusBar/>                
+                <StatusBar />                
                 <Top/>
                 <Bottom navigation={this.props.navigation}/>
                 <Float/>
