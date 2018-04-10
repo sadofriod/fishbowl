@@ -4353,6 +4353,10 @@ react-native-safe-area-view@^0.7.0:
   dependencies:
     hoist-non-react-statics "^2.3.1"
 
+react-native-storage@^0.1.2:
+  version "0.1.5"
+  resolved "http://registry.npm.taobao.org/react-native-storage/download/react-native-storage-0.1.5.tgz#91d77560e41cc9e62d587b55a21b3d6ebaba5599"
+
 "react-native-tab-view@github:react-navigation/react-native-tab-view":
   version "0.0.74"
   resolved "https://codeload.github.com/react-navigation/react-native-tab-view/tar.gz/36ebd834d78b841fc19778c966465d02fd1213bb"
@@ -4430,9 +4434,9 @@ react-native@0.54.4:
     xmldoc "^0.4.0"
     yargs "^9.0.0"
 
-react-navigation@^1.5.9:
-  version "1.5.9"
-  resolved "http://registry.npm.taobao.org/react-navigation/download/react-navigation-1.5.9.tgz#2740fd1b0056559c1d15f12958f6b30448a2154d"
+react-navigation@^1.5.11:
+  version "1.5.11"
+  resolved "http://registry.npm.taobao.org/react-navigation/download/react-navigation-1.5.11.tgz#fba6ab45d7b9987c1763a5aaac53b4f6d62b7f5c"
   dependencies:
     clamp "^1.0.1"
     hoist-non-react-statics "^2.2.0"
@@ -4477,6 +4481,12 @@ react@16.3.0-alpha.1:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
+
+react_native_mqtt@^1.1.9:
+  version "1.1.9"
+  resolved "http://registry.npm.taobao.org/react_native_mqtt/download/react_native_mqtt-1.1.9.tgz#89f7d97ecca460201a06712ec148bdd725880efd"
+  dependencies:
+    react-native-storage "^0.1.2"
 
 read-pkg-up@^1.0.1:
   version "1.0.1"

@@ -5,8 +5,38 @@ import {
     TextInput,
     Image,
     TouchableHighlight,
+    AsyncStorage,
 } from 'react-native';
-import { styles } from './style/floatDataStyle'
+import init from 'react_native_mqtt';
+import { styles } from './style/floatDataStyle';
+init({
+    size: 10000,
+    storageBackend: AsyncStorage,
+    defaultExpires: 1000 * 3600 * 24,
+    enableCache: true,
+    reconnect: true,
+    sync : {
+    }
+  });
+   
+  function onConnect() {
+    console.log("链接成功");
+  }
+   
+  function onConnectionLost(responseObject) {
+    if (responseObject.errorCode !== 0) {
+      console.log("onConnectionLost:"+responseObject.errorMessage);
+    }
+  }
+   
+  function onMessageArrived(message) {
+    console.log("onMessageArrived:"+message.payloadString);
+  }
+   
+  const client = new Paho.MQTT.Client('120.24.96.204', 1883, '(c2,580)');
+  client.onConnectionLost = onConnectionLost;
+  client.onMessageArrived = onMessageArrived;
+  client.connect({ onSuccess:onConnect, useSSL: true });
 export default class floatData extends Component {
     render() {
         return (
