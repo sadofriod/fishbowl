@@ -5,3 +5,6 @@ import {
     Text,
     TouchableHighlight,
 } from 'react-native';
+import {
+    styles
+} from './loginStyle';
