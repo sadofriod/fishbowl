@@ -35,7 +35,7 @@ export default class Detail extends Component {
     }
     warningItems(data) {
         return (
-            <View style={{height:100,width:win.width/4,flex:0,justifyContent:'center',alignItems:'center'}}>
+            <View style={{height:80,width:win.width/4-12,flex:0,justifyContent:'center',alignItems:'center',margin:4}}>
                 <View style={{flex:0,borderRadius:8,backgroundColor:'#fff',width:90,height:85,justifyContent:'center',alignItems:'center',padding:5}}>
                     <Image style={{height:30,borderRadius:15,width:30}} source={require('../../img/normal.png')}/>
                     <Text>{data.words}</Text>
@@ -55,13 +55,13 @@ export default class Detail extends Component {
         },{
             words:'喂食',
         },{
-            words:'浊度高',
+            words:'未开放',
         },{
             words:'换水',
         },{
-            words:'高温',
+            words:'液位',
         },{
-            words:'高温',
+            words:'未开放',
             
         },];
         return dataArray.map(data =>this.warningItems(data))

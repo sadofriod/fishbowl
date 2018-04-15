@@ -14,6 +14,9 @@ import SocketTest from './app/socket_test/socket_test.js';
 import Enviroment from './app/enviromentListener/MainComponent';
 import Detail from './app/enviromentListener/enviromentDetail/detailMain'
 export default class Main extends Component {
+    static navigationOptions = {
+        header:null
+    }
     render() {
         return (
             <View style={{height:Dimensions.get('window').height}}>

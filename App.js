@@ -6,7 +6,8 @@
 
 import React, { Component } from 'react';
 import Main from './main';
-import Login from './app/login/login'
+import Login from './app/login/login';
+import Register from './app/register/register';
 import {
   View,
 } from 'react-native';
@@ -20,6 +21,7 @@ export default class App extends Component {
 }
 const TotalNav = StackNavigator({
   Login: { screen: Login },
-  Main: { screen: Main }
+  Main: { screen: Main },
+  Register: { screen:Register },
 })
 
