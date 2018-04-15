@@ -91,10 +91,10 @@ export default class Detail extends Component {
                         <View style={styles.suggestDataItem}>
                             <Text style={{ color: '#222', fontSize: 24, fontWeight: '900' }}>
                                 25.0℃
-                        </Text>
+                            </Text>
                             <Text>
                                 expect value 25.0℃
-                        </Text>
+                            </Text>
                         </View>
                         <View style={styles.suggestDataItem}>
                             <Text style={{ color: '#222', fontSize: 24, fontWeight: '900' }}>

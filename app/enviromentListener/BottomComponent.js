@@ -6,7 +6,6 @@ import {
     Image,
     TouchableHighlight,
     Dimensions,
-
 } from 'react-native';
 import { styles } from './style/BottomComponent';
 export default class BottomComponent extends Component {
