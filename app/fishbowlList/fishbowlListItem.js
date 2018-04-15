@@ -4,6 +4,10 @@ import {
     Text,
     Image,
     TouchableHighlight,
-    ListView,
     Dimensions,
 } from 'react-native';
+export default class listItem extends Compoent {
+    render(){
+        
+    }
+}
