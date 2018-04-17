@@ -3,12 +3,14 @@
         "fishbowlName": "NO.1",
         "temperature": "25℃",
         "PH": "6.8",
+        "feed":"100%",
         "workTime": "6:00~20:00",
         "address": "内蒙古工业大学"
     },
     {
         "fishbowlName": "NO.2",
         "temperature": "26℃",
+        "feed":"80%",
         "PH": "7.8",
         "workTime": "6:00~20:00",
         "address": "内蒙古工业大学"
@@ -16,6 +18,7 @@
     {
         "fishbowlName": "NO.3",
         "temperature": "24℃",
+        "feed":"90%",
         "PH": "7.2",
         "workTime": "6:00~20:00",
         "address": "内工业大学"

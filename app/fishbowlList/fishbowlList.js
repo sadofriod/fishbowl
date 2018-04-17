@@ -29,6 +29,7 @@ export default class fishbowlList extends Component {
                             fishbowlName={rowData.fishbowlName}
                             temperature={rowData.temperature}
                             PH={rowData.PH}
+                            feed = {rowData.feed}
                             workTime={rowData.workTime}
                             address={rowData.address}
                         />

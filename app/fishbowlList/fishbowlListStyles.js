@@ -12,22 +12,38 @@ export const styles = StyleSheet.create({
         margin:win.width*0.02,
         borderRadius:4,
         backgroundColor:'#fff',
-        padding:8
+        paddingTop:8,
+        paddingLeft:15,
+        paddingRight:15,       
+        elevation:5
     },
     topArea: {
-        flex:1
+        flex:1,
+        borderBottomWidth: 1, 
+        borderColor: 'rgba(34,34,34,.25)'
     },
     midArea: {
-        flex: 4
+        flex: 4,
+        paddingTop:5,
+        borderBottomWidth: 1, 
+        borderColor: 'rgba(34,34,34,.25)'
     },
     dataArea: {
         flex:1,
         flexDirection:'row',
     },
+    dataWord: {
+        flex:1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign:'center',
+        fontSize:18
+    },
     workTime: {
         flex:2
     },
     bottomArea: {
-        flex:1
+        flex:1,
+        paddingTop:5,        
     }
 });

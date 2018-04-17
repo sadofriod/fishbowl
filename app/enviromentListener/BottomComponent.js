@@ -52,7 +52,7 @@ export default class BottomComponent extends Component {
             <View style={styles.container}>
                 <View style={styles.rowBox}>
                     <TouchableHighlight style={styles.rowItem} onPress={() => this.props.navigation.navigate('enviromentDetail')}>
-                        <View>
+                        <View style={{flexDirection:'row'}} >
                             <Image style={styles.rowImage} source={require('../img/Home.png')} />
                             <View style={styles.rowContentBox}>
                                 <Text style={styles.rowContentTitle}>Detailed parameters</Text>
@@ -61,11 +61,11 @@ export default class BottomComponent extends Component {
                         </View>
                     </TouchableHighlight>
                     <TouchableHighlight style={styles.rowItem} onPress={() => this.props.navigation.navigate('fishbowlList')}>
-                        <View>
+                        <View  style={{flexDirection:'row'}}>
                             <Image style={styles.rowImage} source={require('../img/fishTank.png')} />
                             <View style={styles.rowContentBox}>
-                                <Text style={styles.rowContentTitle}>Aquarium Setting</Text>
-                                <Text style={styles.rowContent}>水族箱设置</Text>
+                                <Text style={styles.rowContentTitle}>Fishbowl List</Text>
+                                <Text style={styles.rowContent}>水族箱列表</Text>
                             </View>
                         </View>
                     </TouchableHighlight>
