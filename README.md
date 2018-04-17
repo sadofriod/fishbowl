@@ -6,3 +6,6 @@ Login & Register finish
 
 # 2018-4-15 9:30 update 
 fishbowl list of page init
+
+# 2018-4-17 14:50 update
+All interface initialization completion 
