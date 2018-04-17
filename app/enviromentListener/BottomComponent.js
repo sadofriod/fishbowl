@@ -9,9 +9,9 @@ import {
 } from 'react-native';
 import { styles } from './style/BottomComponent';
 export default class BottomComponent extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        
+
     }
     // renderItems(rowData) {
     //     return (
@@ -51,8 +51,7 @@ export default class BottomComponent extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.rowBox}>
-                
-                    <TouchableHighlight style={styles.rowItem} onPress={()=>this.props.navigation.navigate('enviromentDetail')}>
+                    <TouchableHighlight style={styles.rowItem} onPress={() => this.props.navigation.navigate('enviromentDetail')}>
                         <View>
                             <Image style={styles.rowImage} source={require('../img/Home.png')} />
                             <View style={styles.rowContentBox}>
@@ -61,13 +60,15 @@ export default class BottomComponent extends Component {
                             </View>
                         </View>
                     </TouchableHighlight>
-                    <View style={styles.rowItem}>
-                        <Image style={styles.rowImage} source={require('../img/fishTank.png')} />
-                        <View style={styles.rowContentBox}>
-                            <Text style={styles.rowContentTitle}>Aquarium Setting</Text>
-                            <Text style={styles.rowContent}>水族箱设置</Text>
+                    <TouchableHighlight style={styles.rowItem} onPress={() => this.props.navigation.navigate('fishbowlList')}>
+                        <View>
+                            <Image style={styles.rowImage} source={require('../img/fishTank.png')} />
+                            <View style={styles.rowContentBox}>
+                                <Text style={styles.rowContentTitle}>Aquarium Setting</Text>
+                                <Text style={styles.rowContent}>水族箱设置</Text>
+                            </View>
                         </View>
-                    </View>
+                    </TouchableHighlight>
                 </View>
                 <View style={styles.rowBox}>
                     <View style={styles.rowItem}>

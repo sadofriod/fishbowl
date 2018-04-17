@@ -7,37 +7,40 @@ import {
     TouchableHighlight,
     AsyncStorage,
 } from 'react-native';
-import init from 'react_native_mqtt';
+// import init from 'react_native_mqtt';
 import { styles } from './style/floatDataStyle';
-init({
-    size: 10000,
-    storageBackend: AsyncStorage,
-    defaultExpires: 1000 * 3600 * 24,
-    enableCache: true,
-    reconnect: true,
-    sync : {
-    }
-  });
+import io from 'socket.io-client'
+// init({
+//     size: 10000,
+//     storageBackend: AsyncStorage,
+//     defaultExpires: 1000 * 3600 * 24,
+//     enableCache: true,
+//     reconnect: true,
+//     sync : {
+//     }
+//   });
    
-  function onConnect() {
-    console.log("链接成功");
-  }
+//   function onConnect() {
+//     console.log("链接成功");
+//   }
    
-  function onConnectionLost(responseObject) {
-    if (responseObject.errorCode !== 0) {
-      console.log("onConnectionLost:"+responseObject.errorMessage);
-    }
-  }
+//   function onConnectionLost(responseObject) {
+//     if (responseObject.errorCode !== 0) {
+//       console.log("onConnectionLost:"+responseObject.errorMessage);
+//     }
+//   }
    
-  function onMessageArrived(message) {
-    console.log("onMessageArrived:"+message.payloadString);
-  }
+//   function onMessageArrived(message) {
+//     console.log("onMessageArrived:"+message.payloadString);
+//   }
    
-  const client = new Paho.MQTT.Client('120.24.96.204', 1883, '(c2,580)');
-  client.onConnectionLost = onConnectionLost;
-  client.onMessageArrived = onMessageArrived;
-  client.connect({ onSuccess:onConnect, useSSL: true });
-export default class floatData extends Component {
+//   const client = new Paho.MQTT.Client('120.24.96.204', 1883, 'client');
+//   client.onConnectionLost = onConnectionLost;
+//   client.onMessageArrived = onMessageArrived;
+//   client.connect({ onSuccess:onConnect, useSSL: true });
+  const socket = io('ws://120.24.96.204:1883', {jsonp: false, transports: ['websocket']});
+  console.log(socket)    
+  export default class floatData extends Component {
     render() {
         return (
             <View style={styles.container}>
