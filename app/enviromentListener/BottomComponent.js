@@ -55,7 +55,7 @@ export default class BottomComponent extends Component {
                         <View style={{flexDirection:'row'}} >
                             <Image style={styles.rowImage} source={require('../img/Home.png')} />
                             <View style={styles.rowContentBox}>
-                                <Text style={styles.rowContentTitle}>Detailed parameters</Text>
+                                <Text style={styles.rowContentTitle}>Parameters</Text>
                                 <Text style={styles.rowContent}>水族箱详细参数</Text>
                             </View>
                         </View>
