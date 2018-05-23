@@ -52,7 +52,7 @@ export default class floatData extends Component {
             td1: 0,
             td2: 0.0,
             td3: 7,
-            client: new Paho.MQTT.Client('47.101.60.213', 9000, 'client')
+            client: new Paho.MQTT.Client('123.206.23.115', 9000, 'client')
         }
 
         this.state.client.onConnectionLost = (responseObject) => {
@@ -72,7 +72,7 @@ export default class floatData extends Component {
         //         console.log(payload);
         //     }
         // })
-        this.state.client = new Paho.MQTT.Client('47.101.60.213', 9000, 'client')
+        // this.state.client = new Paho.MQTT.Client('47.101.60.213', 9000, 'client')
         this.state.client.connect({
             onSuccess: () => {
                 console.log('success');

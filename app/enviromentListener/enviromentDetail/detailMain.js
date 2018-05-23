@@ -6,7 +6,8 @@ import {
     Text,
     Image,
     StatusBar,
-    AsyncStorage
+    AsyncStorage,
+    ToastAndroid
 } from 'react-native';
 import { styles, win } from './detailMainStyle';
 import init from 'react_native_mqtt';
@@ -31,22 +32,31 @@ export default class Detail extends Component {
             console.log(this.props.navigation)
             return this.props;
         }
+        // {"heating":"1","oxygen":"1","change":"0","cooling":"0","feed":"0","filtration":"1"}
         this.state = {
-            client: new Paho.MQTT.Client('47.101.60.213', 9000, 'client1'),
+            client: new Paho.MQTT.Client('123.206.23.115', 9000, 'client1'),
             td1: 0,
             td2: 0.0,
             td3: 7,
+            flag4: 0,
+            flag5: 0,
+            flag6: 0,
+            flag9: 0,
+            flag7: 0,
+            flag8: 0,
+            oxygen: 0,
+            feed: 0,
+            filtration: 0,
+            heating: 0,
+            cooling: 0,
+            change: 0,
+            manual: 1,
         }
         this.state.client.onConnectionLost = (responseObject) => {
             if (responseObject.errorCode !== 0) {
                 console.log("onConnectionLost:" + responseObject.errorMessage);
             }
         }
-        this.state.client.onMessageArrived = (message) => {
-            console.log("onMessageArrived:" + message.payloadString);
-        }
-        // StatusBar.setBackgroundColor('', true);
-        StatusBar.setBarStyle('dark-content', true);
     }
     static navigationOptions = {
         headerRight: <TouchableHighlight style={{
@@ -63,65 +73,280 @@ export default class Detail extends Component {
             elevation: 0
         }
     }
-    warningItems(data) {
+    warningItems = (data) => {
+        let num = data.key;
         return (
-            <View style={{ height: 80, width: win.width / 4 - 12, flex: 0, justifyContent: 'center', alignItems: 'center', margin: 4 }}>
-                <View style={{ flex: 0, borderRadius: 8, backgroundColor: '#fff', width: 90, height: 85, justifyContent: 'center', alignItems: 'center', padding: 5 }}>
-                    <Image style={{ height: 30, borderRadius: 15, width: 30 }} source={require('../../img/normal.png')} />
-                    <Text>{data.words}</Text>
+            <TouchableHighlight key={data.key} onPress={() => {
+                console.log(num);
+
+                switch (data.key) {
+                    case 4:
+                        if (this.state.flag4 == 1) {
+                            this.setState({
+                                flag4: 0,
+                                change: 0,
+                            })
+                            ToastAndroid.show('Close Water Exchange', ToastAndroid.SHORT)
+                            this.state.client.publish('/CloudAquarium1/receive',
+                                '{"heating":' + this.state.heating + ',"oxygen":' + this.state.oxygen + ',"change":"0","cooling":' + this.state.cooling + ',"feed":' + this.state.feed + ',"filtration":' + this.state.filtration + '}'
+                            )
+                            break;
+                        }
+                        else {
+                            this.setState({
+                                flag4: 1,
+                                change: 1,
+                            })
+                            ToastAndroid.show('Start Water Exchange', ToastAndroid.SHORT);
+                            this.state.client.publish('/CloudAquarium1/receive',
+                                '{"heating":' + this.state.heating + ',"oxygen":' + this.state.oxygen + ',"change":"1","cooling":' + this.state.cooling + ',"feed":' + this.state.feed + ',"filtration":' + this.state.filtration + '}'
+                            )
+                            break;
+                        }
+                    case 5:
+                        this.setState({
+                            flag5: 0,
+                            feed: 1
+                        })
+                        ToastAndroid.show('Start Feed', ToastAndroid.SHORT);
+                        this.state.client.publish('/CloudAquarium1/receive',
+                            '{"heating":' + this.state.heating + ',"oxygen":' + this.state.oxygen + ',"change":"0","cooling":' + this.state.cooling + ',"feed":"1","filtration":' + this.state.filtration + '}'
+                        )
+                        break;
+                    case 6:
+                        if (this.state.flag6 == 1) {
+                            this.setState({
+                                flag6: 0,
+                                oxygen: 0,
+                            })
+                            ToastAndroid.show('Close Oxygen Pump', ToastAndroid.SHORT)
+                            this.state.client.publish('/CloudAquarium1/receive',
+                                '{"heating":' + this.state.heating + ',"oxygen":"0","change":"0","cooling":' + this.state.cooling + ',"feed":' + this.state.feed + ',"filtration":' + this.state.filtration + '}'
+                            )
+                            break;
+                        }
+                        else {
+                            this.setState({
+                                flag6: 1,
+                                oxygen: 1,
+                            })
+                            ToastAndroid.show('Open Oxygen Pump', ToastAndroid.SHORT);
+                            this.state.client.publish('/CloudAquarium1/receive',
+                                '{"heating":' + this.state.heating + ',"oxygen":"1","change":"0","cooling":' + this.state.cooling + ',"feed":' + this.state.feed + ',"filtration":' + this.state.filtration + '}'
+                            )
+                            break;
+                        }
+                    case 7:
+                        if (this.state.flag7 == 1) {
+                            this.setState({
+                                flag7: 0,
+                                cooling: 0,
+                            })
+                            ToastAndroid.show('Close Fan', ToastAndroid.SHORT);
+                            this.state.client.publish('/CloudAquarium1/receive',
+                                '{"heating":' + this.state.heating + ',"oxygen":' + this.state.oxygen + ',"change":"0","cooling":"0","feed":' + this.state.feed + ',"filtration":' + this.state.filtration + '}'
+                            )
+                            break;
+                        }
+                        else {
+                            this.setState({
+                                flag7: 1,
+                                cooling: 1,
+                            })
+                            ToastAndroid.show('Open Fan', ToastAndroid.SHORT);
+                            this.state.client.publish('/CloudAquarium1/receive',
+                                '{"heating":' + this.state.heating + ',"oxygen":' + this.state.oxygen + ',"change":"0","cooling":"1","feed":' + this.state.feed + ',"filtration":' + this.state.filtration + '}'
+
+                            )
+                            break;
+                        }
+                    case 8:
+                        if (this.state.flag8 == 1) {
+                            this.setState({
+                                flag8: 0,
+                                heating: 0,
+                            })
+                            ToastAndroid.show('Close Heating Pump', ToastAndroid.SHORT);
+                            this.state.client.publish('/CloudAquarium1/receive',
+                                '{"heating":"0","oxygen":' + this.state.oxygen + ',"change":"0","cooling":' + this.state.cooling + ',"feed":' + this.state.feed + ',"filtration":' + this.state.filtration + '}'
+                            )
+                            break;
+                        }
+                        else {
+                            this.setState({
+                                flag8: 1,
+                                heating: 1,
+                            })
+                            ToastAndroid.show('Open Heating Pump', ToastAndroid.SHORT);
+                            this.state.client.publish('/CloudAquarium1/receive',
+                                '{"heating":"1","oxygen":' + this.state.oxygen + ',"change":"0","cooling":' + this.state.cooling + ',"feed":' + this.state.feed + ',"filtration":' + this.state.filtration + '}'
+                            )
+                            break;
+                        }
+                    case 9:
+                        if (this.state.flag9 == 1) {
+                            this.setState({
+                                flag9: 0,
+                                filtration: 0,
+                            })
+                            ToastAndroid.show('Close Filtration Pupm', ToastAndroid.SHORT);
+                            this.state.client.publish('/CloudAquarium1/receive',
+                                '{"heating":' + this.state.heating + ',"oxygen":' + this.state.oxygen + ',"change":"0","cooling":' + this.state.cooling + ',"feed":' + this.state.feed + ',"filtration":"0"}'
+
+                            )
+                            break;
+                        }
+                        else {
+                            this.setState({
+                                flag9: 1,
+                                filtration: 1,
+                            })
+                            ToastAndroid.show('Open Filtration Pupm', ToastAndroid.SHORT);
+                            this.state.client.publish('/CloudAquarium1/receive',
+                                '{"heating":' + this.state.heating + ',"oxygen":' + this.state.oxygen + ',"change":"0","cooling":' + this.state.cooling + ',"feed":' + this.state.feed + ',"filtration":"1"}'
+
+                            )
+                            break;
+                        }
+
+                }
+                console.log(this.state)
+            }}>
+                <View style={{ height: 80, width: win.width / 4 - 12, flex: 0, justifyContent: 'center', alignItems: 'center', margin: 4 }}>
+                    <View style={{ flex: 0, borderRadius: 8, backgroundColor: '#fff', width: 90, height: 85, justifyContent: 'center', alignItems: 'center', padding: 5 }}>
+                        <Image style={{ height: 30, borderRadius: 15, width: 30 }} source={require('../../img/normal.png')} />
+                        <Text>{data.words}</Text>
+                    </View>
                 </View>
-            </View>
+            </TouchableHighlight>
         )
     }
-    warningGroup() {
+    warningGroup = () => {
         let dataArray = [{
             words: '高温',
+            key: 1
         }, {
+            key: 2,
             words: '低温',
         }, {
-            words: '酸性',
+            key: 3,
+            words: '过酸',
         }, {
-            words: '碱性',
-        }, {
-            words: '喂食',
-        }, {
-            words: '未开放',
-        }, {
+            key: 4,
             words: '换水',
         }, {
-            words: '液位',
+            words: '喂食',
+            key: 5,
         }, {
-            words: '未开放',
+            key: 6,
+            words: '加氧',
+        }, {
+            key: 7,
+            words: '风扇',
+        }, {
+            key: 8,
+            words: '加热',
+        }, {
+            key: 9,
+            words: '过滤',
 
         },];
         return dataArray.map(data => this.warningItems(data))
     }
     postData = () => {
-        this.state.client.publish('/CloudAquarium1/receive', '{"heating":"1","oxygen":"1","change":"0","cooling":"0","feed":"0","filtration":"1"}')
-    }
-    componentWillUnmount() {
-        this.state.client.subscribe("/CloudAquarium1/send", {
-            qos: 0, onSuccess: (payload) => {
-                console.log(payload);
-            }
+        this.setState({
+            oxygen: 0,
+            feed: 0,
+            filtration: 0,
+            heating: 0,
+            cooling: 0,
+            change: 0,
+            flag5: 1,
+            flag6: 1,
+            flag9: 1,
+            flag7: 1,
+            flag8: 1,
         })
-        // this.state.client.disconnect();
+        console.log(this.state);
+        this.state.client.publish('/CloudAquarium1/receive', '{"heating":' + this.state.heating + ',"oxygen":' + this.state.oxygen + ',"change":' + this.state.change + ',"cooling":' + this.state.cooling + ',"feed":' + this.state.feed + ',"filtration":' + this.state.filtration + '}')
     }
     componentDidMount() {
-        this.state.client.subscribe("/CloudAquarium1/send", {
-            qos: 0, onSuccess: (payload) => {
-                console.log(payload);
-            }
-        })
+        let self = this;
+        this.state.client.connect({
+            onSuccess: () => {
+                console.log('success');
+                this.state.client.subscribe("/CloudAquarium1/send", {
+                    qos: 1, onSuccess: (payload) => {
+                        console.log(payload);
+                    }
+                })
+            }, useSSL: false
+        });
         this.state.client.onMessageArrived = (message) => {
             // console.log("onMessageArrived:" + message.payloadString);
             let data = JSON.parse(eval(JSON.stringify(message.payloadString)));
-            // console.log(message.payloadString);
+            console.log(data);
             self.setState({
                 td1: data.temp,
                 td2: data.LiquidLevel,
                 td3: data.pH,
             })
+        }
+    }
+    componentDidUpdate() {
+        let self = this;
+        this.state.client.onMessageArrived = (message) => {
+            let data = JSON.parse(eval(JSON.stringify(message.payloadString)));
+            console.log(data);
+            self.setState({
+                td1: data.temp,
+                td2: data.LiquidLevel,
+                td3: data.pH,
+            })
+            if (this.state.manual == 0) {
+                if (this.state.td1 > 25.5) {
+                    this.state.client.publish('/CloudAquarium1/receive', '{"heating":"0","oxygen":' + this.state.oxygen + ',"change":' + this.state.change + ',"cooling":"1","feed":"0","filtration":' + this.state.filtration + '}')
+                }
+                if (this.state.td1 >= 24.9 && this.state.td1 <= 25.5) {
+                    this.state.client.publish('/CloudAquarium1/receive', '{"heating":"0","oxygen":' + this.state.oxygen + ',"change":' + this.state.change + ',"cooling":"0","feed":"0","filtration":' + this.state.filtration + '}')
+                }
+                if (this.state.td1 < 24.9) {
+                    this.state.client.publish('/CloudAquarium1/receive', '{"heating":"1","oxygen":' + this.state.oxygen + ',"change":' + this.state.change + ',"cooling":"0","feed":"0","filtration":' + this.state.filtration + '}')
+                }
+            }
+            // if (this.state.feed == 1) {
+            //     this.state.client.publish('/CloudAquarium1/receive', '{"heating":"1","oxygen":' + this.state.oxygen + ',"change":' + this.state.change + ',"cooling":"0","feed":"0","filtration":' + this.state.filtration + '}')
+            // }
+            // if (this.state.cooling == 1) {
+            //     ToastAndroid.show('Opne Cooling Pump', ToastAndroid.SHORT)
+            // }
+            // else {
+            //     ToastAndroid.show('Close Cooling Pump', ToastAndroid.SHORT)
+            // }
+            // if (this.state.oxygen == 1) {
+            //     ToastAndroid.show('Opne Oxygen Pump', ToastAndroid.SHORT)
+            // }
+            // else {
+            //     ToastAndroid.show('Close Oxygen Pump', ToastAndroid.SHORT)
+            // } 
+            // if (this.state.heating == 1) {
+            //     ToastAndroid.show('Opne Heating Pump', ToastAndroid.SHORT)
+            // }
+            // else {
+            //     ToastAndroid.show('Close Heating Pump', ToastAndroid.SHORT)
+            // } 
+            // if (this.state.filtration == 1) {
+            //     ToastAndroid.show('Opne filtration Pump', ToastAndroid.SHORT)
+            // }
+            // else {
+            //     ToastAndroid.show('Close filtration Pump', ToastAndroid.SHORT)
+            // }
+            // if (this.state.change == 1) {
+            //     ToastAndroid.show('Opne Water Exchange Pump', ToastAndroid.SHORT)
+            // }
+            // else {
+            //     ToastAndroid.show('Close Water Exchange Pump', ToastAndroid.SHORT)
+            // }
         }
     }
     render() {
@@ -165,7 +390,7 @@ export default class Detail extends Component {
                         </View>
                         <View style={styles.suggestDataItem}>
                             <Text style={{ color: '#222', fontSize: 24, fontWeight: '900' }}>
-                                {this.state.td3 }
+                                {this.state.td3}
                             </Text>
                             <Text>
                                 expect 7.5
@@ -177,6 +402,24 @@ export default class Detail extends Component {
                     </View>
                 </View>
                 <View style={styles.errorDealBox}>
+                    <TouchableHighlight style={styles.errorDealButton}
+                        onPress={() => {
+                            if (this.state.manual == 0) {
+                                ToastAndroid.show('Start Manual', ToastAndroid.SHORT);
+                                this.setState({
+                                    manual: 1
+                                });
+                            }
+                            else {
+                                ToastAndroid.show('Start Auto', ToastAndroid.SHORT);
+                                this.setState({
+                                    manual: 0
+                                })
+                            }
+                        }}
+                    >
+                        <Text style={{ color: '#FFF', fontSize: 18, fontWeight: '900' }}>manual</Text>
+                    </TouchableHighlight>
                     <TouchableHighlight style={styles.errorDealButton}
                         onPress={this.postData}
                     >
