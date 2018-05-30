@@ -6,26 +6,28 @@ import {
     TouchableHighlight,
     Dimensions,
 } from 'react-native';
+import { styles } from './styles/commentListItemStyles';
 export default class commentItem extends Component {
     constructor(props) {
         super(props);
     }
     render() {
         return (
-            <View>
-                <View>
-                    <Image />
-                    <Text>{this.props.username}</Text>
+            <View style={styles.container} >
+                <View style={styles.commentHead}>
+                    <Image style={{height:35,width:35,borderRadius:17.5,marginRight:20}} source={require('../img/gear.png')}/>
+                    <Text style={styles.username}>{this.props.username}</Text>
                 </View>
-                <View>
-                    <Text>{this.props.commentContent} </Text>
+                <View style={styles.commentContent}>
+                    <Text style={styles.commentContentWords}>{this.props.commentContent} </Text>
                 </View>
-                <View>
-                    <TouchableHighlight>
-                        <Text>{this.props.fabulous} </Text>
+                <View style={styles.commentToolsGroup}>
+                    <Text style={{flex:2}} >time</Text>
+                    <TouchableHighlight style={styles.commentTool}>
+                        <Text style={{flex:1}} >fabulous:{this.props.fabulous} </Text>
                     </TouchableHighlight>
-                    <TouchableHighlight>
-                        <Text>{this.props.see}</Text>
+                    <TouchableHighlight style={styles.commentTool}>
+                        <Text style={{flex:1}}>see:{this.props.see}</Text>
                     </TouchableHighlight>
                 </View>
             </View>

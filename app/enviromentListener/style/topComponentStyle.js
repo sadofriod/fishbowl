@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
     header:{
         flex:0,
         flexDirection: 'row',
+        paddingRight:15,
         height: 35,
         width: win.width
     },
@@ -25,7 +26,6 @@ export const styles = StyleSheet.create({
         textAlign:'center',
         color:'#fff',
         fontSize:18,
-        
         justifyContent:'center',
     },
     Address:{

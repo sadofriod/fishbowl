@@ -54,11 +54,11 @@ export default class topComponent extends Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <View style={styles.navigatorBar}></View>
-                    <Text style={styles.headerTitle}>Enviroment</Text>
+                    <Text style={styles.headerTitle}>云水族环境参数</Text>
                     <View style={styles.AddressBox}>
                         <Image style={{height:18,width:18}} source={require('../img/address.png')}/>
                         <Text style={styles.Address}>
-                            Address
+                            内蒙古工业大学格物楼
                         </Text>
                     </View>
                 </View>

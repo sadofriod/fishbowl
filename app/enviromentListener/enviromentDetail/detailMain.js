@@ -223,15 +223,6 @@ export default class Detail extends Component {
     }
     warningGroup = () => {
         let dataArray = [{
-            words: '高温',
-            key: 1
-        }, {
-            key: 2,
-            words: '低温',
-        }, {
-            key: 3,
-            words: '过酸',
-        }, {
             key: 4,
             words: '换水',
         }, {
@@ -314,39 +305,6 @@ export default class Detail extends Component {
                     this.state.client.publish('/CloudAquarium1/receive', '{"heating":"1","oxygen":' + this.state.oxygen + ',"change":' + this.state.change + ',"cooling":"0","feed":"0","filtration":' + this.state.filtration + '}')
                 }
             }
-            // if (this.state.feed == 1) {
-            //     this.state.client.publish('/CloudAquarium1/receive', '{"heating":"1","oxygen":' + this.state.oxygen + ',"change":' + this.state.change + ',"cooling":"0","feed":"0","filtration":' + this.state.filtration + '}')
-            // }
-            // if (this.state.cooling == 1) {
-            //     ToastAndroid.show('Opne Cooling Pump', ToastAndroid.SHORT)
-            // }
-            // else {
-            //     ToastAndroid.show('Close Cooling Pump', ToastAndroid.SHORT)
-            // }
-            // if (this.state.oxygen == 1) {
-            //     ToastAndroid.show('Opne Oxygen Pump', ToastAndroid.SHORT)
-            // }
-            // else {
-            //     ToastAndroid.show('Close Oxygen Pump', ToastAndroid.SHORT)
-            // } 
-            // if (this.state.heating == 1) {
-            //     ToastAndroid.show('Opne Heating Pump', ToastAndroid.SHORT)
-            // }
-            // else {
-            //     ToastAndroid.show('Close Heating Pump', ToastAndroid.SHORT)
-            // } 
-            // if (this.state.filtration == 1) {
-            //     ToastAndroid.show('Opne filtration Pump', ToastAndroid.SHORT)
-            // }
-            // else {
-            //     ToastAndroid.show('Close filtration Pump', ToastAndroid.SHORT)
-            // }
-            // if (this.state.change == 1) {
-            //     ToastAndroid.show('Opne Water Exchange Pump', ToastAndroid.SHORT)
-            // }
-            // else {
-            //     ToastAndroid.show('Close Water Exchange Pump', ToastAndroid.SHORT)
-            // }
         }
     }
     render() {

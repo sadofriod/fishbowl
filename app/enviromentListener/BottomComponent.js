@@ -52,7 +52,7 @@ export default class BottomComponent extends Component {
             <View style={styles.container}>
                 <View style={styles.rowBox}>
                     <TouchableHighlight style={styles.rowItem} onPress={() => this.props.navigation.navigate('enviromentDetail')}>
-                        <View style={{flexDirection:'row'}} >
+                        <View style={{ flexDirection: 'row' }} >
                             <Image style={styles.rowImage} source={require('../img/Home.png')} />
                             <View style={styles.rowContentBox}>
                                 <Text style={styles.rowContentTitle}>Parameters</Text>
@@ -61,7 +61,7 @@ export default class BottomComponent extends Component {
                         </View>
                     </TouchableHighlight>
                     <TouchableHighlight style={styles.rowItem} onPress={() => this.props.navigation.navigate('fishbowlList')}>
-                        <View  style={{flexDirection:'row'}}>
+                        <View style={{ flexDirection: 'row' }}>
                             <Image style={styles.rowImage} source={require('../img/fishTank.png')} />
                             <View style={styles.rowContentBox}>
                                 <Text style={styles.rowContentTitle}>Fishbowl List</Text>
@@ -71,13 +71,15 @@ export default class BottomComponent extends Component {
                     </TouchableHighlight>
                 </View>
                 <View style={styles.rowBox}>
-                    <View style={styles.rowItem}>
-                        <Image style={styles.rowImage} source={require('../img/table.png')} />
-                        <View style={styles.rowContentBox}>
-                            <Text style={styles.rowContentTitle}>Environmental Aquarium</Text>
-                            <Text style={styles.rowContent}>统计图表</Text>
+                    <TouchableHighlight style={styles.rowItem} onPress={() => this.props.navigation.navigate('fishComment')}>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Image style={styles.rowImage} source={require('../img/table.png')} />
+                            <View style={styles.rowContentBox}>
+                                <Text style={styles.rowContentTitle}>Community</Text>
+                                <Text style={styles.rowContent}>社区讨论</Text>
+                            </View>
                         </View>
-                    </View>
+                    </TouchableHighlight>
                     <View style={styles.rowItem}>
                         <Image style={styles.rowImage} source={require('../img/secWatch.png')} />
                         <View style={styles.rowContentBox}>

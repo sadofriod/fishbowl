@@ -14,6 +14,7 @@ import SocketTest from './app/socket_test/socket_test.js';
 import Enviroment from './app/enviromentListener/MainComponent';
 import Detail from './app/enviromentListener/enviromentDetail/detailMain'
 import FishbowlList from './app/fishbowlList/fishbowlList.js';
+import CommentListContainer from './app/fishComment/fishCommentMain'
 export default class Main extends Component {
     static navigationOptions = {
         header: null
@@ -35,5 +36,6 @@ export default class Main extends Component {
 const EnviromentNav = StackNavigator({
     enviromentListen: { screen: Enviroment },
     enviromentDetail: { screen: Detail },
-    fishbowlList: { screen: FishbowlList }
+    fishbowlList: { screen: FishbowlList },
+    fishComment: { screen: CommentListContainer }
 })

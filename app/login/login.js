@@ -21,6 +21,7 @@ export default class Login extends Component {
                 <StatusBar backgroundColor='#fff' />
                 <View style={styles.topArea}>
                     <Image style={styles.header} source={require('../img/defaultHeader.png')} />
+                    <Text style={{fontSize:40}} >GeniusK</Text>
                 </View>
                 <View style={styles.midArea} >
                     <View style={styles.inputGroup} >
