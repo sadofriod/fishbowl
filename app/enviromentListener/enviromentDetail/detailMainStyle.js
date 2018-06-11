@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center'
     },
     suggestIconBox: {
-        flex: 3,
+        flex: 1,
         // justifyContent: 'center',
         alignItems: 'center',
         flexWrap:'wrap',

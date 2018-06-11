@@ -7,10 +7,12 @@ import {
     Image,
     StatusBar,
     AsyncStorage,
-    ToastAndroid
+    ToastAndroid,
+    WebView
 } from 'react-native';
 import { styles, win } from './detailMainStyle';
 import init from 'react_native_mqtt';
+import Vedio from '../../videoCalls/videoCall'
 init({
     size: 10000,
     storageBackend: AsyncStorage,
@@ -76,9 +78,7 @@ export default class Detail extends Component {
     warningItems = (data) => {
         let num = data.key;
         return (
-            <TouchableHighlight key={data.key} onPress={() => {
-                console.log(num);
-
+            <TouchableHighlight key={data.key} style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: 4 }} onPress={() => {
                 switch (data.key) {
                     case 4:
                         if (this.state.flag4 == 1) {
@@ -212,11 +212,9 @@ export default class Detail extends Component {
                 }
                 console.log(this.state)
             }}>
-                <View style={{ height: 80, width: win.width / 4 - 12, flex: 0, justifyContent: 'center', alignItems: 'center', margin: 4 }}>
-                    <View style={{ flex: 0, borderRadius: 8, backgroundColor: '#fff', width: 90, height: 85, justifyContent: 'center', alignItems: 'center', padding: 5 }}>
-                        <Image style={{ height: 30, borderRadius: 15, width: 30 }} source={require('../../img/normal.png')} />
-                        <Text>{data.words}</Text>
-                    </View>
+                <View style={{ flex: 1, borderRadius: 8, backgroundColor: '#fff', justifyContent: 'center', alignItems: 'center', padding: 5 }}>
+                    <Image style={{ height: 30, borderRadius: 15, width: 30 }} source={require('../../img/normal.png')} />
+                    <Text>{data.words}</Text>
                 </View>
             </TouchableHighlight>
         )
@@ -355,9 +353,22 @@ export default class Detail extends Component {
                             </Text>
                         </View>
                     </View>
+                    <View style={{ flex: 2 }} >
+                        <WebView
+                            automaticallyAdjustContentInsets={false}
+                            style={{ flex: 1 }}
+                            allowsInlineMediaPlayback={true}
+                            source={{ uri: "https://react-native-webrtc.herokuapp.com" }}
+                            javaScriptEnabled={true}
+                            domStorageEnabled={true}
+                            decelerationRate="normal"
+                            startInLoadingState={true}
+                        />
+                    </View>
                     <View style={styles.suggestIconBox}>
                         {this.warningGroup()}
                     </View>
+
                 </View>
                 <View style={styles.errorDealBox}>
                     <TouchableHighlight style={styles.errorDealButton}
