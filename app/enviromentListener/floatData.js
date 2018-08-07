@@ -19,31 +19,6 @@ init({
     sync: {
     }
 });
-
-// function onConnect() {
-//     console.log("链接成功");
-
-//     client.subscribe("/CloudAquarium1/send", {
-//         qos: 0, onSuccess: (payload) => {
-//             console.log(payload);
-
-//         }
-//     })
-//     client.publish("/CloudAquarium1/send", "HelloWorld!");
-// }
-
-// function onConnectionLost
-// }
-
-// function onMessageArrived(message) {
-//     console.log("onMessageArrived:" + message.payloadString);
-// }
-
-// let client = new Paho.MQTT.Client('47.101.60.213', 9000, 'client');
-// client.onConnectionLost = onConnectionLost;
-// client.onMessageArrived = onMessageArrived;
-// client.connect({ onSuccess: onConnect, useSSL: false });
-// console.log(client);
 export default class floatData extends Component {
     constructor(props) {
         // socket.emit('testPost',{td:1});        
@@ -52,7 +27,7 @@ export default class floatData extends Component {
             td1: 0,
             td2: 0.0,
             td3: 7,
-            client: new Paho.MQTT.Client('123.206.23.115', 9000, 'client')
+            client: new Paho.MQTT.Client('47.93.253.168', 9000, 'client')
         }
 
         this.state.client.onConnectionLost = (responseObject) => {
@@ -65,14 +40,7 @@ export default class floatData extends Component {
         }
     }
     componentDidMount() {
-        // console.log(this.state);
         let self = this;
-        // this.state.client.subscribe("/CloudAquarium1/send", {
-        //     qos: 0, onSuccess: (payload) => {
-        //         console.log(payload);
-        //     }
-        // })
-        // this.state.client = new Paho.MQTT.Client('47.101.60.213', 9000, 'client')
         this.state.client.connect({
             onSuccess: () => {
                 console.log('success');
@@ -89,9 +57,7 @@ export default class floatData extends Component {
             }
         }
         this.state.client.onMessageArrived = (message) => {
-            // console.log("onMessageArrived:" + message.payloadString);
             let data = JSON.parse(eval(JSON.stringify(message.payloadString)));
-            // console.log(message.payloadString);
             self.setState({
                 td1: data.temp,
                 td2: data.LiquidLevel,

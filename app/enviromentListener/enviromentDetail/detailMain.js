@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { styles, win } from './detailMainStyle';
 import init from 'react_native_mqtt';
-import Vedio from '../../videoCalls/videoCall'
+import Vedio from '../../videoCalls/videoCall';
 init({
     size: 10000,
     storageBackend: AsyncStorage,
@@ -22,21 +22,16 @@ init({
     sync: {
     }
 });
-// let client = new Paho.MQTT.Client('47.101.60.213', 9000, 'client');
-// client.connect({ onSuccess:()=>{
-//     console.log('success')
-// } , useSSL: false });
 
 export default class Detail extends Component {
     constructor(props) {
         super(props);
         Detail.prototype.caller = () => {
-            console.log(this.props.navigation)
             return this.props;
         }
         // {"heating":"1","oxygen":"1","change":"0","cooling":"0","feed":"0","filtration":"1"}
         this.state = {
-            client: new Paho.MQTT.Client('123.206.23.115', 9000, 'client1'),
+            client: new Paho.MQTT.Client('47.93.253.168', 9000, 'client1'),
             td1: 0,
             td2: 0.0,
             td3: 7,
@@ -210,7 +205,6 @@ export default class Detail extends Component {
                         }
 
                 }
-                console.log(this.state)
             }}>
                 <View style={{ flex: 1, borderRadius: 8, backgroundColor: '#fff', justifyContent: 'center', alignItems: 'center', padding: 5 }}>
                     <Image style={{ height: 30, borderRadius: 15, width: 30 }} source={require('../../img/normal.png')} />
@@ -256,14 +250,12 @@ export default class Detail extends Component {
             flag7: 1,
             flag8: 1,
         })
-        console.log(this.state);
         this.state.client.publish('/CloudAquarium1/receive', '{"heating":' + this.state.heating + ',"oxygen":' + this.state.oxygen + ',"change":' + this.state.change + ',"cooling":' + this.state.cooling + ',"feed":' + this.state.feed + ',"filtration":' + this.state.filtration + '}')
     }
     componentDidMount() {
         let self = this;
         this.state.client.connect({
-            onSuccess: () => {
-                console.log('success');
+            onSuccess: () => {;
                 this.state.client.subscribe("/CloudAquarium1/send", {
                     qos: 1, onSuccess: (payload) => {
                         console.log(payload);
@@ -274,7 +266,6 @@ export default class Detail extends Component {
         this.state.client.onMessageArrived = (message) => {
             // console.log("onMessageArrived:" + message.payloadString);
             let data = JSON.parse(eval(JSON.stringify(message.payloadString)));
-            console.log(data);
             self.setState({
                 td1: data.temp,
                 td2: data.LiquidLevel,
@@ -286,7 +277,7 @@ export default class Detail extends Component {
         let self = this;
         this.state.client.onMessageArrived = (message) => {
             let data = JSON.parse(eval(JSON.stringify(message.payloadString)));
-            console.log(data);
+            // console.log(data);
             self.setState({
                 td1: data.temp,
                 td2: data.LiquidLevel,
@@ -353,8 +344,8 @@ export default class Detail extends Component {
                             </Text>
                         </View>
                     </View>
-                    <View style={{ flex: 2 }} >
-                        <WebView
+                    <View style={{flex:2}} >
+                    {/* <WebView
                             automaticallyAdjustContentInsets={false}
                             style={{ flex: 1 }}
                             allowsInlineMediaPlayback={true}
@@ -363,7 +354,8 @@ export default class Detail extends Component {
                             domStorageEnabled={true}
                             decelerationRate="normal"
                             startInLoadingState={true}
-                        />
+                        /> */}
+                        <Vedio/>
                     </View>
                     <View style={styles.suggestIconBox}>
                         {this.warningGroup()}
