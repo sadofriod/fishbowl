@@ -35,8 +35,13 @@ export default class Login extends Component {
                 password:this.state.password
             })
         })
-        registerFetch.then( data=>{
-            console.log(data);
+        registerFetch.then(res=>{
+            if(res.ok){
+                return res.json();
+            }
+        })
+        .then( data=>{
+            // console.log( data.success);
             if (data.success == 1) {
                 this.props.navigation.navigate('Login');
                 ToastAndroid.show('Register Success', ToastAndroid.SHORT)

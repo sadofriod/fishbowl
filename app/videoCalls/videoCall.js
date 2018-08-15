@@ -282,7 +282,10 @@ export default class VideoCalls extends Component {
                 <RTCView streamURL={this.state.selfViewSrc} style={styles.selfView} />
                 {
                     mapHash(this.state.remoteList, function (remote, index) {
-                        return <RTCView key={index} streamURL={remote} style={styles.remoteView} />
+                        console.log(index);
+                        // if(index<1){
+                            return <RTCView key={index} streamURL={remote} style={styles.remoteView} />
+                        // }
                     })
                 }
             </View>

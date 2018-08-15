@@ -23,20 +23,28 @@ export default class Login extends Component {
         header: null
     }
     login = () => {
-        let loginFetch = fetch('http://39.105.18.219:3000', {
+        let loginFetch = fetch('http://39.105.18.219:3000/login', {
             method: 'POST',
-            body: {
+            headers:{
+               "Content-type": "application/json",
+               "Accept":"application/json"
+            } ,
+            body: JSON.stringify({
                 account: this.state.account,
                 password:this.state.password
+            })
+        })
+        loginFetch.then(res => {
+            if(res.ok){
+                return res.json();
+            }
+        }).then(data=>{
+            console.log(data)
+            if (!data.fail&&data.length!=0) {
+                this.props.navigation.navigate('Main');
+                // ToastAndroid.show('Register Success', ToastAndroid.SHORT);
             }
         })
-        loginFetch.then( data=>{
-            console.log(data);
-            if (data.isAdmin != null) {
-                this.props.navigation.navigate('Main')
-            }
-        })
-        
     }
     render() {
         return (
@@ -60,7 +68,7 @@ export default class Login extends Component {
                         }} underlineColorAndroid='rgba(34,34,34,0.15)' placeholderTextColor='rgba(34,34,34,0.35)' placeholder='Password' />
                     </View>
                     <View style={styles.buttonGroup} >
-                        <TouchableHighlight style={styles.buttonItem} onPress={() => {this.props.navigation.navigate('Main') }}>
+                        <TouchableHighlight style={styles.buttonItem} onPress={() => {this.login() }}>
                             <Text style={{ color: '#999' }} >Login</Text>
                         </TouchableHighlight>
                         <TouchableHighlight style={styles.buttonItem} onPress={() => this.props.navigation.navigate('Register')}>
