@@ -12,8 +12,31 @@ import {
     styles
 } from './loginStyle';
 export default class Login extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            account: '',
+            password: '',
+        }
+    }
     static navigationOptions = {
         header: null
+    }
+    login = () => {
+        let loginFetch = fetch('http://39.105.18.219:3000', {
+            method: 'POST',
+            body: {
+                account: this.state.account,
+                password:this.state.password
+            }
+        })
+        loginFetch.then( data=>{
+            console.log(data);
+            if (data.isAdmin != null) {
+                this.props.navigation.navigate('Main')
+            }
+        })
+        
     }
     render() {
         return (
@@ -21,18 +44,26 @@ export default class Login extends Component {
                 <StatusBar backgroundColor='#fff' />
                 <View style={styles.topArea}>
                     <Image style={styles.header} source={require('../img/defaultHeader.png')} />
-                    <Text style={{fontSize:40}} >GeniusK</Text>
+                    <Text style={{ fontSize: 40 }} >GeniusK</Text>
                 </View>
                 <View style={styles.midArea} >
                     <View style={styles.inputGroup} >
-                        <TextInput style={styles.inputItem} underlineColorAndroid='rgba(34,34,34,0.15)' placeholderTextColor='rgba(34,34,34,0.35)' placeholder='Account' />
-                        <TextInput style={styles.inputItem} underlineColorAndroid='rgba(34,34,34,0.15)' placeholderTextColor='rgba(34,34,34,0.35)' placeholder='Password' />
+                        <TextInput style={styles.inputItem} onChangeText={(text) => {
+                            this.setState({
+                                account: text
+                            })
+                        }} underlineColorAndroid='rgba(34,34,34,0.15)' placeholderTextColor='rgba(34,34,34,0.35)' placeholder='Account' />
+                        <TextInput style={styles.inputItem} onChangeText={(text) => {
+                            this.setState({
+                                password: text
+                            })
+                        }} underlineColorAndroid='rgba(34,34,34,0.15)' placeholderTextColor='rgba(34,34,34,0.35)' placeholder='Password' />
                     </View>
                     <View style={styles.buttonGroup} >
-                        <TouchableHighlight style={styles.buttonItem} onPress={() => this.props.navigation.navigate('Main')}>
+                        <TouchableHighlight style={styles.buttonItem} onPress={() => {this.props.navigation.navigate('Main') }}>
                             <Text style={{ color: '#999' }} >Login</Text>
                         </TouchableHighlight>
-                        <TouchableHighlight style={styles.buttonItem}  onPress={() => this.props.navigation.navigate('Register')}>
+                        <TouchableHighlight style={styles.buttonItem} onPress={() => this.props.navigation.navigate('Register')}>
                             <Text style={{ color: '#999' }}>register</Text>
                         </TouchableHighlight>
                     </View>

@@ -48,6 +48,7 @@ export default class Detail extends Component {
             cooling: 0,
             change: 0,
             manual: 1,
+            v: <Vedio />
         }
         this.state.client.onConnectionLost = (responseObject) => {
             if (responseObject.errorCode !== 0) {
@@ -252,10 +253,16 @@ export default class Detail extends Component {
         })
         this.state.client.publish('/CloudAquarium1/receive', '{"heating":' + this.state.heating + ',"oxygen":' + this.state.oxygen + ',"change":' + this.state.change + ',"cooling":' + this.state.cooling + ',"feed":' + this.state.feed + ',"filtration":' + this.state.filtration + '}')
     }
+
+    componentWillUnmount(){
+        this.setState({v:null});
+    }
+
     componentDidMount() {
         let self = this;
         this.state.client.connect({
-            onSuccess: () => {;
+            onSuccess: () => {
+                ;
                 this.state.client.subscribe("/CloudAquarium1/send", {
                     qos: 1, onSuccess: (payload) => {
                         console.log(payload);
@@ -296,6 +303,8 @@ export default class Detail extends Component {
             }
         }
     }
+
+
     render() {
 
         return (
@@ -344,8 +353,8 @@ export default class Detail extends Component {
                             </Text>
                         </View>
                     </View>
-                    <View style={{flex:2}} >
-                    {/* <WebView
+                    <View style={{ flex: 2 }} >
+                        {/* <WebView
                             automaticallyAdjustContentInsets={false}
                             style={{ flex: 1 }}
                             allowsInlineMediaPlayback={true}
@@ -354,8 +363,9 @@ export default class Detail extends Component {
                             domStorageEnabled={true}
                             decelerationRate="normal"
                             startInLoadingState={true}
-                        /> */}
-                        <Vedio/>
+                        /> */}{
+                            this.state.v
+                        }
                     </View>
                     <View style={styles.suggestIconBox}>
                         {this.warningGroup()}

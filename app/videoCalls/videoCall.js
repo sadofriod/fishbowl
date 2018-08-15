@@ -216,6 +216,7 @@ function getStats() {
 }
 
 let container;
+let url = '';
 
 export default class VideoCalls extends Component {
     constructor(props) {
@@ -226,29 +227,44 @@ export default class VideoCalls extends Component {
             status: 'init',
             roomID: '',
             isFront: true,
-            selfViewSrc: null,
+            selfViewSrc: url || null,
             remoteList: {},
             textRoomConnected: false,
             textRoomData: [],
             textRoomValue: '',
         }
-        socket = io.connect('https://react-native-webrtc.herokuapp.com', { transports: ['websocket'] });
-        console.log(socket)
-        container = this;
-        socket.on('connect', function (data) {
-            console.log('connect');
-            getLocalStream(true, function (stream) {
-                localStream = stream;
-                container.setState({ selfViewSrc: stream.toURL() });
-                container.setState({ status: 'ready', info: 'Please enter or create room ID' });
-                                
-            });
-        });
+        //if (socket == null) {
+            
+        //}
     }
     static navigationOptions = {
         header: null
     }
+
+    componentWillUnmount() {
+     
+        socket.close();
+    }
+
     componentDidMount() {
+        socket = io.connect('https://react-native-webrtc.herokuapp.com', { transports: ['websocket'] });
+            console.warn(socket)
+            container = this;
+            socket.on('connect', function (data) {
+                try {
+                    console.warn('connect');
+                    if(url=='')
+                    getLocalStream(true, function (stream) {
+                        localStream = stream;
+                        container.setState({ selfViewSrc: stream.toURL() });
+                        url = this.state.selfViewSrc;
+                        container.setState({ status: 'ready', info: 'Please enter or create room ID' });
+
+                    });
+                } catch (ex) {
+                    console.warn(ex);
+                }
+            });
         socket.on('exchange', function (data) {
             exchange(data);
         });
@@ -277,10 +293,10 @@ const win = Dimensions.get('window');
 const styles = StyleSheet.create({
     selfView: {
         position: 'absolute',
-        right:-win.width*0.3,
+        right: -win.width * 0.3,
         top: 0,
-        width: win.width,
-        height: win.height * 0.3,
+        width: 0,
+        height: 0,
     },
     remoteView: {
         width: win.width,
@@ -289,13 +305,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#000',
-        justifyContent:'center'
+        justifyContent: 'center'
     },
     welcome: {
         fontSize: 20,
         textAlign: 'center',
         margin: 10,
-        color:'#fff'
+        color: '#fff'
     },
     listViewContainer: {
         height: 150,
