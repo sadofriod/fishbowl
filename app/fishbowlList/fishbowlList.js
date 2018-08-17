@@ -55,6 +55,7 @@ export default class fishbowlList extends Component {
                                 feed={rowData.feed}
                                 workTime={rowData.wfilter}
                                 address={rowData.wexchange}
+                                navigation={this.props.navigation}
                             />
                         }
                     />

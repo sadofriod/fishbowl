@@ -8,9 +8,12 @@ import {
 } from 'react-native';
 import { styles } from './fishbowlListStyles'
 export default class listItem extends Component {
+    constructor(props){
+        super(props);
+    }
     render() {
         return (
-            <TouchableHighlight>
+            <TouchableHighlight onPress={()=>this.props.navigation.navigate('fishbowlSet')} >
                 <View style={styles.container} >
                     <View style={styles.topArea}>
                         <Text>水族箱名:{this.props.fishbowlName}</Text>
