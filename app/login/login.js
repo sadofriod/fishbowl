@@ -3,7 +3,8 @@ import {
     View,
     TextInput,
     Text,
-    TouchableHighlight,
+    // TouchableOpacity,
+    TouchableOpacity,
     ImageBackground,
     Image,
     StatusBar,
@@ -68,18 +69,18 @@ export default class Login extends Component {
                         }} underlineColorAndroid='rgba(34,34,34,0.15)' placeholderTextColor='rgba(34,34,34,0.35)' placeholder='Password' />
                     </View>
                     <View style={styles.buttonGroup} >
-                        <TouchableHighlight style={styles.buttonItem} onPress={() => {this.login() }}>
+                        <TouchableOpacity style={styles.buttonItem} onPress={() => {this.login() }}>
                             <Text style={{ color: '#999' }} >Login</Text>
-                        </TouchableHighlight>
-                        <TouchableHighlight style={styles.buttonItem} onPress={() => this.props.navigation.navigate('Register')}>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.buttonItem} onPress={() => this.props.navigation.navigate('Register')}>
                             <Text style={{ color: '#999' }}>register</Text>
-                        </TouchableHighlight>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={styles.bottomArea} >
-                    <TouchableHighlight style={{ height: 37 }}>
+                    <TouchableOpacity style={{ height: 37 }}>
                         <Text>forget password</Text>
-                    </TouchableHighlight>
+                    </TouchableOpacity>
                 </View>
             </View>
         );

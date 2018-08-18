@@ -3,7 +3,7 @@ import {
     View,
     Text,
     Image,
-    TouchableHighlight,
+    TouchableOpacity,
     Dimensions,
 } from 'react-native';
 import { styles } from './fishbowlListStyles'
@@ -13,7 +13,7 @@ export default class listItem extends Component {
     }
     render() {
         return (
-            <TouchableHighlight onPress={()=>this.props.navigation.navigate('fishbowlSet')} >
+            <TouchableOpacity onPress={()=>this.props.navigation.navigate('fishbowlSet')} >
                 <View style={styles.container} >
                     <View style={styles.topArea}>
                         <Text>水族箱名:{this.props.fishbowlName}</Text>
@@ -32,7 +32,7 @@ export default class listItem extends Component {
                         <Text>地址:{this.props.address}</Text>
                     </View>
                 </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
 
         )
 

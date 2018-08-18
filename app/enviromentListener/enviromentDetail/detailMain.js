@@ -35,6 +35,8 @@ export default class Detail extends Component {
             td1: 0,
             td2: 0.0,
             td3: 7,
+            defaultTemperture:'',
+            defaultPH:'',
             flag4: 0,
             flag5: 0,
             flag6: 0,
@@ -279,6 +281,26 @@ export default class Detail extends Component {
                 td3: data.pH,
             })
         }
+        let getDefautParameter = fetch('http://39.105.18.219:3000/getDefaultParameter', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json'
+            },
+            body: ''
+        });
+        getDefautParameter.then(res => {
+            if (res.ok) {
+                return res.json();
+            }
+        }).then(data => {
+            let defaultData = JSON.parse(data);
+            console.log(defaultData)
+            this.setState({
+                defaultPH: defaultData[0].ph,
+                defaultTemperture: defaultData[0].temperature
+            })
+        })
     }
     componentDidUpdate() {
         let self = this;
@@ -332,7 +354,7 @@ export default class Detail extends Component {
                                 {this.state.td1}
                             </Text>
                             <Text>
-                                expect 25.0℃
+                                expect{'  '+this.state.defaultTemperture}
                             </Text>
                         </View>
                         <View style={styles.suggestDataItem}>
@@ -349,21 +371,12 @@ export default class Detail extends Component {
                                 {this.state.td3}
                             </Text>
                             <Text>
-                                expect 7.5
+                                expect{'  '+this.state.defaultPH}
                             </Text>
                         </View>
                     </View>
                     <View style={{ flex: 2 }} >
-                        {/* <WebView
-                            automaticallyAdjustContentInsets={false}
-                            style={{ flex: 1 }}
-                            allowsInlineMediaPlayback={true}
-                            source={{ uri: "https://react-native-webrtc.herokuapp.com" }}
-                            javaScriptEnabled={true}
-                            domStorageEnabled={true}
-                            decelerationRate="normal"
-                            startInLoadingState={true}
-                        /> */}{
+                        {
                             this.state.v
                         }
                     </View>

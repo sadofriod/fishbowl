@@ -67,23 +67,23 @@ export default class listItem extends Component {
     defaultParameterGroup = () => {
         let defaultParameter = [
             {
-                name: '温度',
-                value: this.state.defaultTemp,
+                name: '温度:',
+                value: this.state.defaultTemp+'  ℃',
             }, {
-                name: 'PH',
-                value: this.state.defaultPH,
+                name: 'PH:',
+                value: this.state.defaultPH+'  g/ml',
             }, {
-                name: '喂食次数',
-                value: this.state.defaultFeed,
+                name: '喂食次数:',
+                value: this.state.defaultFeed+'  (一日)',
             }, {
-                name: '换水时间',
-                value: this.state.defaultChage,
+                name: '换水时间:',
+                value: this.state.defaultChage+'  (一周)',
             },
         ];
         return defaultParameter.map((data, index) => {
             return (
                 <View key={index} style={styles.defaultParameterWordItem}>
-                    <Text style={{ color: '#fff' }} >{data.name}</Text>
+                    <Text style={{ color: '#fff',marginRight:5 }} >{data.name}</Text>
                     <Text style={{ color: '#fff' }}>{data.value}</Text>
                 </View>
             )
@@ -101,12 +101,12 @@ export default class listItem extends Component {
             parameter: 'PH',
             imageUrl: require('../img/PH.png')
         }, {
-            name: '喂食次数',
+            name: '喂食次数 (一日)',
             value: this.state.feed,
             parameter: 'feed',
             imageUrl: require('../img/feed_in.png')
         }, {
-            name: '换水时间',
+            name: '换水次数 (一周)',
             value: this.state.change,
             parameter: 'change',
             imageUrl: require('../img/secWatch.png')
@@ -155,7 +155,13 @@ export default class listItem extends Component {
                 return res.json();
             }
         }).then(data=>{
-            if(data.succecc == 1){
+            if(data.success == 1){
+                this.setState({
+                    defaultChage: this.state.change,
+                    defaultFeed: this.state.feed,
+                    defaultPH: this.state.PH,
+                    defaultTemp: this.state.temperature
+                })
                 ToastAndroid.show('Reset Success', ToastAndroid.SHORT);
             }
         })

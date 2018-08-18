@@ -4,7 +4,7 @@ import {
     Text,
     TextInput,
     Image,
-    TouchableHighlight,
+    TouchableOpacity,
     Dimensions,
 } from 'react-native';
 import { styles } from './style/BottomComponent';
@@ -51,7 +51,7 @@ export default class BottomComponent extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.rowBox}>
-                    <TouchableHighlight style={styles.rowItem} onPress={() => this.props.navigation.navigate('enviromentDetail')}>
+                    <TouchableOpacity style={styles.rowItem} onPress={() => this.props.navigation.navigate('enviromentDetail')}>
                         <View style={{ flexDirection: 'row' }} >
                             <Image style={styles.rowImage} source={require('../img/Home.png')} />
                             <View style={styles.rowContentBox}>
@@ -59,8 +59,8 @@ export default class BottomComponent extends Component {
                                 <Text style={styles.rowContent}>水族箱详细参数</Text>
                             </View>
                         </View>
-                    </TouchableHighlight>
-                    <TouchableHighlight style={styles.rowItem} onPress={() => this.props.navigation.navigate('fishbowlList')}>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.rowItem} onPress={() => this.props.navigation.navigate('fishbowlList')}>
                         <View style={{ flexDirection: 'row' }}>
                             <Image style={styles.rowImage} source={require('../img/fishTank.png')} />
                             <View style={styles.rowContentBox}>
@@ -68,10 +68,10 @@ export default class BottomComponent extends Component {
                                 <Text style={styles.rowContent}>水族箱列表</Text>
                             </View>
                         </View>
-                    </TouchableHighlight>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.rowBox}>
-                    <TouchableHighlight style={styles.rowItem} onPress={() => this.props.navigation.navigate('fishComment')}>
+                    <TouchableOpacity style={styles.rowItem} onPress={() => this.props.navigation.navigate('fishComment')}>
                         <View style={{ flexDirection: 'row' }}>
                             <Image style={styles.rowImage} source={require('../img/table.png')} />
                             <View style={styles.rowContentBox}>
@@ -79,7 +79,7 @@ export default class BottomComponent extends Component {
                                 <Text style={styles.rowContent}>社区讨论</Text>
                             </View>
                         </View>
-                    </TouchableHighlight>
+                    </TouchableOpacity>
                     <View style={styles.rowItem}>
                         <Image style={styles.rowImage} source={require('../img/secWatch.png')} />
                         <View style={styles.rowContentBox}>

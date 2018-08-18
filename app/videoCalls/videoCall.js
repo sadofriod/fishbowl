@@ -51,6 +51,7 @@ function getLocalStream(isFront, callback) {
 }
 
 function join(roomID) {
+    console.log(roomID);
     socket.emit('join', roomID, function (socketIds) {
         console.log('join', socketIds);
         for (const i in socketIds) {
@@ -234,7 +235,7 @@ export default class VideoCalls extends Component {
             textRoomValue: '',
         }
         //if (socket == null) {
-            
+
         //}
     }
     static navigationOptions = {
@@ -242,18 +243,18 @@ export default class VideoCalls extends Component {
     }
 
     componentWillUnmount() {
-     
+
         socket.close();
     }
 
     componentDidMount() {
         socket = io.connect('https://react-native-webrtc.herokuapp.com', { transports: ['websocket'] });
-            console.warn(socket)
-            container = this;
-            socket.on('connect', function (data) {
-                try {
-                    console.warn('connect');
-                    if(url=='')
+        console.warn(socket)
+        container = this;
+        socket.on('connect', function (data) {
+            try {
+                console.warn('connect');
+                if (url == '')
                     getLocalStream(true, function (stream) {
                         localStream = stream;
                         container.setState({ selfViewSrc: stream.toURL() });
@@ -261,17 +262,31 @@ export default class VideoCalls extends Component {
                         container.setState({ status: 'ready', info: 'Please enter or create room ID' });
 
                     });
-                } catch (ex) {
-                    console.warn(ex);
-                }
-            });
+            } catch (ex) {
+                console.warn(ex);
+            }
+        });
         socket.on('exchange', function (data) {
             exchange(data);
         });
         socket.on('leave', function (socketId) {
             leave(socketId);
         });
-        join("123");
+        let getFishRoom = fetch('http://39.105.18.219:3000/getFishRoom', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json",
+                "Accept": "application/json"
+            },
+            body: ''
+        });
+        getFishRoom.then(res => {
+            if (res.ok) {
+                return res.json();
+            }
+        }).then(data => {
+            join(data.result[0].vedio_room);
+        })
     }
     render() {
         return (
@@ -284,7 +299,7 @@ export default class VideoCalls extends Component {
                     mapHash(this.state.remoteList, function (remote, index) {
                         console.log(index);
                         // if(index<1){
-                            return <RTCView key={index} streamURL={remote} style={styles.remoteView} />
+                        return <RTCView key={index} streamURL={remote} style={styles.remoteView} />
                         // }
                     })
                 }
