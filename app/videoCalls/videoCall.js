@@ -285,6 +285,7 @@ export default class VideoCalls extends Component {
                 return res.json();
             }
         }).then(data => {
+            console.log(data)
             join(data.result[0].vedio_room);
         })
     }
