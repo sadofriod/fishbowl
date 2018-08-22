@@ -80,13 +80,13 @@ export default class BottomComponent extends Component {
                             </View>
                         </View>
                     </TouchableOpacity>
-                    <View style={styles.rowItem}>
+                    <TouchableOpacity style={styles.rowItem} onPress={()=>this.props.navigation.navigate('fishSussage')}>
                         <Image style={styles.rowImage} source={require('../img/secWatch.png')} />
                         <View style={styles.rowContentBox}>
-                            <Text style={styles.rowContentTitle}>Work Time</Text>
-                            <Text style={styles.rowContent}>工作时间</Text>
+                            <Text style={styles.rowContentTitle}>Feeding scheme</Text>
+                            <Text style={styles.rowContent}>饲养方案</Text>
                         </View>
-                    </View>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.rowBox}>
                     <View style={styles.rowItem}>

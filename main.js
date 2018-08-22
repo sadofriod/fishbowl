@@ -9,10 +9,11 @@ import {
     TabNavigator,
 } from 'react-navigation'
 import Enviroment from './app/enviromentListener/MainComponent';
-import Detail from './app/enviromentListener/enviromentDetail/detailMain'
+import Detail from './app/enviromentListener/enviromentDetail/detailMain';
 import FishbowlList from './app/fishbowlList/fishbowlList.js';
-import fishbowlSet from './app/fishbowlList/fishbowlSet'
-import CommentListContainer from './app/fishComment/fishCommentMain'
+import fishbowlSet from './app/fishbowlList/fishbowlSet';
+import CommentListContainer from './app/fishComment/fishCommentMain';
+import fishSu from './app/fishbowlList/fishSussage';
 export default class Main extends Component {
     static navigationOptions = {
         header: null
@@ -30,6 +31,7 @@ const EnviromentNav = StackNavigator({
     enviromentListen: { screen: Enviroment },
     enviromentDetail: { screen: Detail },
     fishbowlList: { screen: FishbowlList },
-    fishbowlSet: { screen:fishbowlSet },
-    fishComment: { screen: CommentListContainer }
+    fishbowlSet: { screen: fishbowlSet },
+    fishComment: { screen: CommentListContainer },
+    fishSussage: { screen: fishSu }
 })

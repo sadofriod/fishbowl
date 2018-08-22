@@ -286,7 +286,7 @@ export default class VideoCalls extends Component {
             }
         }).then(data => {
             console.log(data)
-            join(data.result[0].vedio_room);
+            join('123');
         })
     }
     render() {

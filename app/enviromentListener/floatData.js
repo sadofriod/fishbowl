@@ -21,13 +21,14 @@ init({
 });
 export default class floatData extends Component {
     constructor(props) {
-        // socket.emit('testPost',{td:1});        
+        // socket.emit('testPost',{td:1});
+        let ran = Math.random(10000)
         super(props);
         this.state = {
             td1: 0,
             td2: 0.0,
             td3: 7,
-            client: new Paho.MQTT.Client('47.93.253.168', 9000, 'client')
+            client: new Paho.MQTT.Client('47.93.253.168', 9000, 'client'+ran)
         }
 
         this.state.client.onConnectionLost = (responseObject) => {

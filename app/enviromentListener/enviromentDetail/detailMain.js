@@ -29,9 +29,10 @@ export default class Detail extends Component {
         Detail.prototype.caller = () => {
             return this.props;
         }
+        let ran = Date.now()
         // {"heating":"1","oxygen":"1","change":"0","cooling":"0","feed":"0","filtration":"1"}
         this.state = {
-            client: new Paho.MQTT.Client('47.93.253.168', 9000, 'client1'),
+            client: new Paho.MQTT.Client('47.93.253.168', 9000, 'client1'+ran),
             td1: 0,
             td2: 0.0,
             td3: 7,
@@ -52,6 +53,7 @@ export default class Detail extends Component {
             manual: 1,
             v: <Vedio />
         }
+        console.log(ran)
         this.state.client.onConnectionLost = (responseObject) => {
             if (responseObject.errorCode !== 0) {
                 console.log("onConnectionLost:" + responseObject.errorMessage);

@@ -6,8 +6,9 @@ import {
     StatusBar,
     Text
 } from 'react-native';
-import ListItem from './fishbowlListItem';
+import ListItem from './fishbowlListItem1';
 let ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+// import testData from './fishbowlListTestData.json'
 export default class fishbowlList extends Component {
     constructor(props) {
         super(props);
@@ -16,11 +17,11 @@ export default class fishbowlList extends Component {
         }
     }
     static navigationOptions = {
-        title: '水族箱列表'
+        title: '饲养方案'
     }
     componentDidMount() {
         // let self = this;
-        let getFishList = fetch('http://39.105.18.219:3000/selectAllFish', {
+        let getFishList = fetch('http://39.105.18.219:3000/selectAllFishSu', {
             method: 'POST',
             headers: {
                 "Content-type": "application/json",
@@ -49,11 +50,11 @@ export default class fishbowlList extends Component {
                         renderRow={
                             (rowData) => <ListItem
                                 fishbowlName={rowData.name}
-                                temperature={rowData.temperature}
+                                temperature={rowData.tem}
                                 PH={rowData.ph}
                                 feed={rowData.feed}
-                                workTime={rowData.fish_id}
-                                address={rowData.change}
+                                workTime={rowData.wfilter}
+                                // address={rowData.wexchange}
                                 navigation={this.props.navigation}
                             />
                         }

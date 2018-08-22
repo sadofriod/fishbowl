@@ -6,7 +6,6 @@ import {
     StatusBar
 } from 'react-native';
 import ListItem from './commentListItem';
-import testData from './testData.json'
 export default class CommentListContainer extends Component {
     constructor(props) {
         super(props);
