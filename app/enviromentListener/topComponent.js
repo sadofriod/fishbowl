@@ -57,21 +57,6 @@ export default class topComponent extends Component {
             let data = JSON.parse(eval(JSON.stringify(message.payloadString)));
             self.setState({
                 td1: data.temp,
-            }, () => {
-                let temp = 100 - 1.5 * Math.abs(self.state.td1 - self.state.paramTemp);
-                console.log(temp)
-                if (temp <= 51)
-                    self.setState({ comment: self.commentArray[0] });
-                if (temp <= 61)
-                    self.setState({ comment: self.commentArray[1] });
-                if (temp <= 81)
-                    self.setState({ comment: self.commentArray[2] });
-                if (temp <= 91)
-                    self.setState({ comment: self.commentArray[3] });
-                self.setState({
-                    store: 100 - 1.5 * Math.abs(self.state.td1 - self.state.paramTemp)
-                })
-
             })
         }
         let getFishList = fetch('http://39.105.18.219:3000/selectAllFish', {
@@ -97,24 +82,21 @@ export default class topComponent extends Component {
         })
     }
     componentDidUpdate() {
-        // this.setState({
-        //     store: 100-1.5*Math.abs(this.state.td1-this.state.paramTemp)
-        // })
         // console.log(100-1.5*Math.abs(this.state.td1-this.state.paramTemp))
-        // switch ((100-1.5*Math.abs(this.state.td1-this.state.paramTemp))) {
-        //     case 51:
-        //         this.setState({ comment: this.commentArray[0] });
-        //         break;
-        //     case 61:
-        //         this.setState({ comment: this.commentArray[1] });
-        //         break;
-        //     case 81:
-        //         this.setState({ comment: this.commentArray[2] });
-        //         break;
-        //     case 91:
-        //         this.setState({ comment: this.commentArray[3] });
-        //         break;
-        // }
+        switch (this.state.store) {
+            case 51:
+                this.setState({ comment: this.commentArray[0] });
+                break;
+            case 61:
+                this.setState({ comment: this.commentArray[1] });
+                break;
+            case 81:
+                this.setState({ comment: this.commentArray[2] });
+                break;
+            case 91:
+                this.setState({ comment: this.commentArray[3] });
+                break;
+        }
     }
     render() {
         return (

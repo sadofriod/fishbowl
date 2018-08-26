@@ -14,6 +14,7 @@ import FishbowlList from './app/fishbowlList/fishbowlList.js';
 import fishbowlSet from './app/fishbowlList/fishbowlSet';
 import CommentListContainer from './app/fishComment/fishCommentMain';
 import fishSu from './app/fishbowlList/fishSussage';
+import VR from './app/vr_video/vr_video'
 export default class Main extends Component {
     static navigationOptions = {
         header: null
@@ -33,5 +34,6 @@ const EnviromentNav = StackNavigator({
     fishbowlList: { screen: FishbowlList },
     fishbowlSet: { screen: fishbowlSet },
     fishComment: { screen: CommentListContainer },
-    fishSussage: { screen: fishSu }
+    fishSussage: { screen: fishSu },
+    VR: { screen: VR },
 })

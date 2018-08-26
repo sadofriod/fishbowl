@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
     View,
     Dimensions,
-    TouchableHighlight,
+    TouchableOpacity,
     Text,
     Image,
     StatusBar,
@@ -61,7 +61,7 @@ export default class Detail extends Component {
         }
     }
     static navigationOptions = {
-        headerRight: <TouchableHighlight style={{
+        headerRight: <TouchableOpacity style={{
             height: 30,
             flex: 0,
             justifyContent: 'center',
@@ -69,7 +69,7 @@ export default class Detail extends Component {
             paddingRight: 15
         }} onPress={() => Detail.prototype.caller()}>
             <Text>switch fishbowl</Text>
-        </TouchableHighlight>,
+        </TouchableOpacity>,
         headerStyle: {
             height: 30,
             elevation: 0
@@ -78,7 +78,7 @@ export default class Detail extends Component {
     warningItems = (data) => {
         let num = data.key;
         return (
-            <TouchableHighlight key={data.key} style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: 4 }} onPress={() => {
+            <TouchableOpacity key={data.key} style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: 4 }} onPress={() => {
                 switch (data.key) {
                     case 4:
                         if (this.state.flag4 == 1) {
@@ -215,7 +215,7 @@ export default class Detail extends Component {
                     <Image style={{ height: 30, borderRadius: 15, width: 30 }} source={require('../../img/normal.png')} />
                     <Text>{data.words}</Text>
                 </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
         )
     }
     warningGroup = () => {
@@ -337,7 +337,8 @@ export default class Detail extends Component {
                 <Text style={styles.functionTitle}>Detailed parameters</Text>
                 <View style={styles.addressBox}>
                     <Text style={{ fontSize: 18, flex: 2 }}>BaoTou City</Text>
-                    <TouchableHighlight style={{
+                    <TouchableOpacity 
+                    style={{
                         height: 30,
                         flex: 1,
                         borderRadius: 15,
@@ -347,7 +348,7 @@ export default class Detail extends Component {
                         paddingRight: 15
                     }}>
                         <Text style={{ textAlign: 'center' }}>set parameters</Text>
-                    </TouchableHighlight>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.suggestBox}>
                     <View style={styles.suggestDataBox}>
@@ -388,7 +389,7 @@ export default class Detail extends Component {
 
                 </View>
                 <View style={styles.errorDealBox}>
-                    <TouchableHighlight style={styles.errorDealButton}
+                    <TouchableOpacity style={styles.errorDealButton}
                         onPress={() => {
                             if (this.state.manual == 0) {
                                 ToastAndroid.show('Start Manual', ToastAndroid.SHORT);
@@ -405,12 +406,12 @@ export default class Detail extends Component {
                         }}
                     >
                         <Text style={{ color: '#FFF', fontSize: 18, fontWeight: '900' }}>manual</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight style={styles.errorDealButton}
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.errorDealButton}
                         onPress={this.postData}
                     >
                         <Text style={{ color: '#FFF', fontSize: 18, fontWeight: '900' }}>worning deal</Text>
-                    </TouchableHighlight>
+                    </TouchableOpacity>
                 </View>
             </View>
         )

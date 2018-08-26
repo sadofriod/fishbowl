@@ -89,13 +89,13 @@ export default class BottomComponent extends Component {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.rowBox}>
-                    <View style={styles.rowItem}>
+                    <TouchableOpacity style={styles.rowItem} onPress={()=>this.props.navigation.navigate('VR')}>
                         <Image style={styles.rowImage} source={require('../img/shield.png')} />
                         <View style={styles.rowContentBox}>
                             <Text style={styles.rowContentTitle}>Alarm Processing</Text>
                             <Text style={styles.rowContent}>警报处理</Text>
                         </View>
-                    </View>
+                    </TouchableOpacity>
                     <View style={styles.rowItem}>
                         <Image style={styles.rowImage} source={require('../img/gear.png')} />
                         <View style={styles.rowContentBox}>
