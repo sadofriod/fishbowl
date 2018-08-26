@@ -22,7 +22,7 @@ export default class commentItem extends Component {
                     <Text style={styles.commentContentWords}>{this.props.commentContent} </Text>
                 </View>
                 <View style={styles.commentToolsGroup}>
-                    <Text style={{flex:2}} >time</Text>
+                    <Text style={{flex:2}} >time:{this.props.time}</Text>
                     <TouchableHighlight style={styles.commentTool}>
                         <Text style={{flex:1}} >fabulous:{this.props.fabulous} </Text>
                     </TouchableHighlight>

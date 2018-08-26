@@ -2,31 +2,27 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    TextInput,
-    TouchableHighlight,
     WebView
 } from 'react-native';
 import CommentListContainer from './commentListContainer'
-import { styles } from './styles/mainStyles';
+// import { styles } from './styles/mainStyles';
 export default class FishComment extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            comment:'',
+            data:{},
+            submitFlag:0,
+        }
     }
     static navigationOptions = {
         title: '测试一水族箱的社区'
     }
+    
     render() {
         return (
-            <View style={styles.container} >
                 
-                <CommentListContainer />
-                <View style={styles.speak}>
-                    <TextInput style={styles.commentInput} placeholder="发表你的看法" />
-                    <TouchableHighlight style={styles.submitButton}>
-                        <Text>发送</Text>
-                    </TouchableHighlight>
-                </View>
-            </View>
+                <CommentListContainer data={this.state.data}  submitFlag={this.state.submitFlag}/>
         )
     }
 }

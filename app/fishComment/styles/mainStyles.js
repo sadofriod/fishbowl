@@ -9,6 +9,10 @@ export const styles = StyleSheet.create({
         height:win.height-80,
         width:win.width
     },
+    commentContainer:{
+        height:win.height-140,
+        width:win.width
+    },
     speak:{
         position:'absolute',
         bottom:0,
