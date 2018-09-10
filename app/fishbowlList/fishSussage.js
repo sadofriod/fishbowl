@@ -3,6 +3,7 @@ import {
     View,
     ListView,
     Dimensions,
+    AsyncStorage,
     StatusBar,
     Text
 } from 'react-native';
@@ -20,25 +21,35 @@ export default class fishbowlList extends Component {
         title: '饲养方案'
     }
     componentDidMount() {
-        // let self = this;
-        let getFishList = fetch('http://39.105.18.219:3000/selectAllFishSu', {
-            method: 'POST',
-            headers: {
-                "Content-type": "application/json",
-                "Accept": "application/json"
-            },
-            body: ''
-        });
-        getFishList.then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-        }).then(data => {
-            console.log(data.result);
-            this.setState({
-                ds: ds.cloneWithRows(data.result)
+        AsyncStorage.getItem('user_id')
+            .then(value => {
+                return value;
+            }).then(data =>{
+                console.log(data)
+                let getFishList = fetch('http://39.105.18.219:3010/selectAllUserFish', {
+                    method: 'POST',
+                    headers: {
+                        "Content-type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify({
+                        userId: data
+                    })
+                })
+                .then(res => {
+                    console.log(res)
+                    if (res.ok) {
+                        return res.json();
+                    }
+                }).then(data => {
+                    console.log(data.result)
+                    this.setState({
+                        ds: ds.cloneWithRows(data.result)
+                    })
+                })
             })
-        })
+        // let self = this;
+        
     }
     render() {
         return (
@@ -49,18 +60,21 @@ export default class fishbowlList extends Component {
                         dataSource={this.state.ds}
                         renderRow={
                             (rowData) => <ListItem
-                                fishbowlName={rowData.name}
-                                temperature={rowData.tem}
-                                PH={rowData.ph}
-                                feed={rowData.feed}
+                                key = {rowData.fish_id}
+                                fishName={rowData.fish_name}
+                                temperature={rowData.default_temperture}
+                                PH={rowData.default_ph}
+                                feed={rowData.default_feed}
                                 workTime={rowData.wfilter}
-                                // address={rowData.wexchange}
+                                change={rowData.default_change}
+                                price={rowData.price}
+                                fishhome={rowData.fish_home}
                                 navigation={this.props.navigation}
                             />
                         }
                     />
                     :
-                    <Text style={{flex:1,justifyContent:'center',alignItems:'center'}} >数据加载中</Text>
+                    <Text style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >数据加载中</Text>
                 }
             </View>
 

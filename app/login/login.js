@@ -3,7 +3,7 @@ import {
     View,
     TextInput,
     Text,
-    // TouchableOpacity,
+    AsyncStorage,
     TouchableOpacity,
     ImageBackground,
     Image,
@@ -24,7 +24,7 @@ export default class Login extends Component {
         header: null
     }
     login = () => {
-        let loginFetch = fetch('http://39.105.18.219:3000/login', {
+        let loginFetch = fetch('http://39.105.18.219:3010/login', {
             method: 'POST',
             headers:{
                "Content-type": "application/json",
@@ -40,12 +40,25 @@ export default class Login extends Component {
                 return res.json();
             }
         }).then(data=>{
-            console.log(data)
+            let user_info = data[0];
+            console.log(user_info)
             if (!data.fail&&data.length!=0) {
+                AsyncStorage.setItem('user_id',user_info.user_id+'');
+                AsyncStorage.setItem('user_name',user_info.user_name+'');
+                AsyncStorage.setItem('user_root1',user_info.user_is_admin+'');
+                AsyncStorage.setItem('user_root2',user_info.user_is_normal+'');
+                AsyncStorage.setItem('user_root3',user_info.user_is_business+'');
                 this.props.navigation.navigate('Main');
                 // ToastAndroid.show('Register Success', ToastAndroid.SHORT);
             }
-        })
+        });
+        console.log(loginFetch);
+
+    }
+    componentWillMount(){
+        if(AsyncStorage.getItem('user_id')){
+            this.props.navigation.navigate('Main');            
+        }
     }
     render() {
         return (

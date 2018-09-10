@@ -36,13 +36,15 @@ export const styles = StyleSheet.create({
         flex:1,
         justifyContent: 'center',
         alignItems: 'center',
-        textAlign:'center',
+        textAlign:'left',
         fontSize:18
     },
     workTime: {
-        flex:2
+        flex:2,
+        flexDirection:'row'
     },
     bottomArea: {
+        flexDirection:'row',
         flex:1,
         paddingTop:5,        
     }
