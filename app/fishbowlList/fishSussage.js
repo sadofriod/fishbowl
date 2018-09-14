@@ -61,6 +61,7 @@ export default class fishbowlList extends Component {
                         renderRow={
                             (rowData) => <ListItem
                                 key = {rowData.fish_id}
+                                fishId = {rowData.fish_id}
                                 fishName={rowData.fish_name}
                                 temperature={rowData.default_temperture}
                                 PH={rowData.default_ph}

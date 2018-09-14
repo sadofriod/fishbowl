@@ -4,6 +4,7 @@ import {
     Text,
     Image,
     TouchableOpacity,
+    AsyncStorage,
     Dimensions,
 } from 'react-native';
 import { styles } from './fishbowlListStyles'
@@ -11,9 +12,13 @@ export default class listItem extends Component {
     constructor(props) {
         super(props);
     }
+
     render() {
         return (
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('fishbowlSet')} >
+            <TouchableOpacity onPress={() => {
+                AsyncStorage.setItem('fish_id',this.props.fishId+'',err=>console.log(err))
+                this.props.navigation.navigate('fishPassage')
+            }} >
                 <View style={styles.container} >
                     <View style={styles.topArea}>
                         <Text>水族名:{this.props.fishName}</Text>
@@ -25,12 +30,12 @@ export default class listItem extends Component {
                         </View>
 
                         <View style={styles.workTime}>
-                            <Text style={styles.dataWord}>换水间隔:{this.props.change}h</Text>
+                            <Text style={styles.dataWord}>换水间隔:{this.props.change}</Text>
                             <Text style={styles.dataWord}>PH:{this.props.PH}</Text>
                         </View>
                     </View>
                     <View style={styles.bottomArea}>
-                        <Text>产地:{this.props.fishhome+'         '}</Text>
+                        <Text>产地:{this.props.fishhome + '         '}</Text>
                         <Text>价格:{this.props.price}</Text>
                     </View>
                 </View>

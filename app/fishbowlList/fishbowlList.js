@@ -13,7 +13,8 @@ export default class fishbowlList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ds: null
+            ds: null,
+            userId:1
         }
     }
     static navigationOptions = {
@@ -25,6 +26,9 @@ export default class fishbowlList extends Component {
                 return value;
             }).then(data => {
                 console.log(data)
+                this.setState({
+                    userId:data
+                })
                 let getFishList = fetch('http://39.105.18.219:3010/selectUserAllFishbowl', {
                     method: 'POST',
                     headers: {
@@ -58,6 +62,8 @@ export default class fishbowlList extends Component {
                         renderRow={
                             (rowData) => <ListItem
                                 key={rowData.fishbowl_id}
+                                fishbowlId = {rowData.fishbowl_id}
+                                userId={this.state.userId}
                                 fishbowlName={rowData.fishbowl_name}
                                 temperature={rowData.expect_temperture}
                                 PH={rowData.expect_ph}

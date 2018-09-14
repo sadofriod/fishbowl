@@ -45,7 +45,7 @@ export default class floatData extends Component {
         this.state.client.connect({
             onSuccess: () => {
                 console.log('success');
-                this.state.client.subscribe("/CloudAquarium1/send", {
+                this.state.client.subscribe("/CloudAquarium2/send", {
                     qos: 0, onSuccess: (payload) => {
                         console.log(payload);
                     }
@@ -67,7 +67,7 @@ export default class floatData extends Component {
         }
     }
     // componentWillUpdate(){
-    //     this.state.client.subscribe("/CloudAquarium1/send", {
+    //     this.state.client.subscribe("/CloudAquarium2/send", {
     //         qos: 0, onSuccess: (payload) => {
     //             console.log(payload);
     //         }

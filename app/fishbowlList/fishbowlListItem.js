@@ -2,14 +2,22 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    Image,
     TouchableOpacity,
-    Dimensions,
+    AsyncStorage
 } from 'react-native';
 import { styles } from './fishbowlListStyles'
 export default class listItem extends Component {
     constructor(props) {
         super(props);
+        let fishbowlId = this.props.fishbowlId;
+        console.log(fishbowlId)
+        
+    }
+    componentDidMount(){
+        AsyncStorage.setItem('fishbowl_id',this.props.fishbowlId+'',(err)=>{
+            console.log(err);
+        })
+
     }
     render() {
         return (

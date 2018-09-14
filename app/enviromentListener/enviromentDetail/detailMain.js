@@ -87,7 +87,7 @@ export default class Detail extends Component {
                                 change: 0,
                             })
                             ToastAndroid.show('Close Water Exchange', ToastAndroid.SHORT)
-                            this.state.client.publish('/CloudAquarium1/receive',
+                            this.state.client.publish('/CloudAquarium2/receive',
                                 '{"heating":' + this.state.heating + ',"oxygen":' + this.state.oxygen + ',"change":"0","cooling":' + this.state.cooling + ',"feed":' + this.state.feed + ',"filtration":' + this.state.filtration + '}'
                             )
                             break;
@@ -98,7 +98,7 @@ export default class Detail extends Component {
                                 change: 1,
                             })
                             ToastAndroid.show('Start Water Exchange', ToastAndroid.SHORT);
-                            this.state.client.publish('/CloudAquarium1/receive',
+                            this.state.client.publish('/CloudAquarium2/receive',
                                 '{"heating":' + this.state.heating + ',"oxygen":' + this.state.oxygen + ',"change":"1","cooling":' + this.state.cooling + ',"feed":' + this.state.feed + ',"filtration":' + this.state.filtration + '}'
                             )
                             break;
@@ -109,7 +109,7 @@ export default class Detail extends Component {
                             feed: 1
                         })
                         ToastAndroid.show('Start Feed', ToastAndroid.SHORT);
-                        this.state.client.publish('/CloudAquarium1/receive',
+                        this.state.client.publish('/CloudAquarium2/receive',
                             '{"heating":' + this.state.heating + ',"oxygen":' + this.state.oxygen + ',"change":"0","cooling":' + this.state.cooling + ',"feed":"1","filtration":' + this.state.filtration + '}'
                         )
                         break;
@@ -120,7 +120,7 @@ export default class Detail extends Component {
                                 oxygen: 0,
                             })
                             ToastAndroid.show('Close Oxygen Pump', ToastAndroid.SHORT)
-                            this.state.client.publish('/CloudAquarium1/receive',
+                            this.state.client.publish('/CloudAquarium2/receive',
                                 '{"heating":' + this.state.heating + ',"oxygen":"0","change":"0","cooling":' + this.state.cooling + ',"feed":' + this.state.feed + ',"filtration":' + this.state.filtration + '}'
                             )
                             break;
@@ -131,7 +131,7 @@ export default class Detail extends Component {
                                 oxygen: 1,
                             })
                             ToastAndroid.show('Open Oxygen Pump', ToastAndroid.SHORT);
-                            this.state.client.publish('/CloudAquarium1/receive',
+                            this.state.client.publish('/CloudAquarium2/receive',
                                 '{"heating":' + this.state.heating + ',"oxygen":"1","change":"0","cooling":' + this.state.cooling + ',"feed":' + this.state.feed + ',"filtration":' + this.state.filtration + '}'
                             )
                             break;
@@ -143,7 +143,7 @@ export default class Detail extends Component {
                                 cooling: 0,
                             })
                             ToastAndroid.show('Close Fan', ToastAndroid.SHORT);
-                            this.state.client.publish('/CloudAquarium1/receive',
+                            this.state.client.publish('/CloudAquarium2/receive',
                                 '{"heating":' + this.state.heating + ',"oxygen":' + this.state.oxygen + ',"change":"0","cooling":"0","feed":' + this.state.feed + ',"filtration":' + this.state.filtration + '}'
                             )
                             break;
@@ -154,7 +154,7 @@ export default class Detail extends Component {
                                 cooling: 1,
                             })
                             ToastAndroid.show('Open Fan', ToastAndroid.SHORT);
-                            this.state.client.publish('/CloudAquarium1/receive',
+                            this.state.client.publish('/CloudAquarium2/receive',
                                 '{"heating":' + this.state.heating + ',"oxygen":' + this.state.oxygen + ',"change":"0","cooling":"1","feed":' + this.state.feed + ',"filtration":' + this.state.filtration + '}'
 
                             )
@@ -167,7 +167,7 @@ export default class Detail extends Component {
                                 heating: 0,
                             })
                             ToastAndroid.show('Close Heating Pump', ToastAndroid.SHORT);
-                            this.state.client.publish('/CloudAquarium1/receive',
+                            this.state.client.publish('/CloudAquarium2/receive',
                                 '{"heating":"0","oxygen":' + this.state.oxygen + ',"change":"0","cooling":' + this.state.cooling + ',"feed":' + this.state.feed + ',"filtration":' + this.state.filtration + '}'
                             )
                             break;
@@ -178,7 +178,7 @@ export default class Detail extends Component {
                                 heating: 1,
                             })
                             ToastAndroid.show('Open Heating Pump', ToastAndroid.SHORT);
-                            this.state.client.publish('/CloudAquarium1/receive',
+                            this.state.client.publish('/CloudAquarium2/receive',
                                 '{"heating":"1","oxygen":' + this.state.oxygen + ',"change":"0","cooling":' + this.state.cooling + ',"feed":' + this.state.feed + ',"filtration":' + this.state.filtration + '}'
                             )
                             break;
@@ -190,7 +190,7 @@ export default class Detail extends Component {
                                 filtration: 0,
                             })
                             ToastAndroid.show('Close Filtration Pupm', ToastAndroid.SHORT);
-                            this.state.client.publish('/CloudAquarium1/receive',
+                            this.state.client.publish('/CloudAquarium2/receive',
                                 '{"heating":' + this.state.heating + ',"oxygen":' + this.state.oxygen + ',"change":"0","cooling":' + this.state.cooling + ',"feed":' + this.state.feed + ',"filtration":"0"}'
 
                             )
@@ -202,7 +202,7 @@ export default class Detail extends Component {
                                 filtration: 1,
                             })
                             ToastAndroid.show('Open Filtration Pupm', ToastAndroid.SHORT);
-                            this.state.client.publish('/CloudAquarium1/receive',
+                            this.state.client.publish('/CloudAquarium2/receive',
                                 '{"heating":' + this.state.heating + ',"oxygen":' + this.state.oxygen + ',"change":"0","cooling":' + this.state.cooling + ',"feed":' + this.state.feed + ',"filtration":"1"}'
 
                             )
@@ -255,7 +255,7 @@ export default class Detail extends Component {
             flag7: 1,
             flag8: 1,
         })
-        this.state.client.publish('/CloudAquarium1/receive', '{"heating":' + this.state.heating + ',"oxygen":' + this.state.oxygen + ',"change":' + this.state.change + ',"cooling":' + this.state.cooling + ',"feed":' + this.state.feed + ',"filtration":' + this.state.filtration + '}')
+        this.state.client.publish('/CloudAquarium2/receive', '{"heating":' + this.state.heating + ',"oxygen":' + this.state.oxygen + ',"change":' + this.state.change + ',"cooling":' + this.state.cooling + ',"feed":' + this.state.feed + ',"filtration":' + this.state.filtration + '}')
     }
 
     componentWillUnmount(){
@@ -267,7 +267,7 @@ export default class Detail extends Component {
         this.state.client.connect({
             onSuccess: () => {
                 ;
-                this.state.client.subscribe("/CloudAquarium1/send", {
+                this.state.client.subscribe("/CloudAquarium2/send", {
                     qos: 1, onSuccess: (payload) => {
                         console.log(payload);
                     }
@@ -316,13 +316,13 @@ export default class Detail extends Component {
             })
             if (this.state.manual == 0) {
                 if (this.state.td1 > 25.5) {
-                    this.state.client.publish('/CloudAquarium1/receive', '{"heating":"0","oxygen":' + this.state.oxygen + ',"change":' + this.state.change + ',"cooling":"1","feed":"0","filtration":' + this.state.filtration + '}')
+                    this.state.client.publish('/CloudAquarium2/receive', '{"heating":"0","oxygen":' + this.state.oxygen + ',"change":' + this.state.change + ',"cooling":"1","feed":"0","filtration":' + this.state.filtration + '}')
                 }
                 if (this.state.td1 >= 24.9 && this.state.td1 <= 25.5) {
-                    this.state.client.publish('/CloudAquarium1/receive', '{"heating":"0","oxygen":' + this.state.oxygen + ',"change":' + this.state.change + ',"cooling":"0","feed":"0","filtration":' + this.state.filtration + '}')
+                    this.state.client.publish('/CloudAquarium2/receive', '{"heating":"0","oxygen":' + this.state.oxygen + ',"change":' + this.state.change + ',"cooling":"0","feed":"0","filtration":' + this.state.filtration + '}')
                 }
                 if (this.state.td1 < 24.9) {
-                    this.state.client.publish('/CloudAquarium1/receive', '{"heating":"1","oxygen":' + this.state.oxygen + ',"change":' + this.state.change + ',"cooling":"0","feed":"0","filtration":' + this.state.filtration + '}')
+                    this.state.client.publish('/CloudAquarium2/receive', '{"heating":"1","oxygen":' + this.state.oxygen + ',"change":' + this.state.change + ',"cooling":"0","feed":"0","filtration":' + this.state.filtration + '}')
                 }
             }
         }

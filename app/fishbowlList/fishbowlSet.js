@@ -6,6 +6,7 @@ import {
     Image,
     TouchableOpacity,
     ToastAndroid,
+    AsyncStorage,
     Dimensions,
 } from 'react-native';
 import { styles } from './fishbowlSetStyles'
@@ -20,8 +21,13 @@ export default class listItem extends Component {
             defaultFeed: '',
             defaultTemp: '',
             defaultPH: '',
-            defaultChage: ''
+            defaultChage: '',
+            user_id: '',
+            fishbowl_id: ''
         }
+    }
+    componentWillMount() {
+
     }
     static navigationOptions = {
         title: '水族箱参数设置',
@@ -41,26 +47,40 @@ export default class listItem extends Component {
         headerTintColor: '#fff'
     }
     componentDidMount() {
-        let getDefautParameter = fetch('http://39.105.18.219:3000/getDefaultParameter', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-type': 'application/json'
-            },
-            body: ''
-        });
-        getDefautParameter.then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-        }).then(data => {
-            let defaultData = JSON.parse(data);
-            console.log(defaultData)
-            this.setState({
-                defaultChage: defaultData[0].change,
-                defaultFeed: defaultData[0].feed,
-                defaultPH: defaultData[0].ph,
-                defaultTemp: defaultData[0].temperature
+        AsyncStorage.getItem('user_id').then(data => {
+            console.log(data)
+            this.setState({ user_id: data })
+        }).then(() => {
+            AsyncStorage.getItem('fishbowl_id').then(data => {
+                console.log(data)
+                this.setState({ fishbowl_id: data })
+            }).then(() => {
+                let getDefautParameter = fetch('http://39.105.18.219:3010/getDefaultParameter', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        fishbowl_id: this.state.fishbowl_id,
+                        user_id: this.state.user_id
+                    })
+                })
+                    .then(res => {
+                        if (res.ok) {
+                            return res.json();
+                        }
+                    }).then(data => {
+                        let defaultData = JSON.parse(data);
+                        console.log(defaultData)
+                        this.setState({
+                            defaultChage: defaultData[0].expect_change,
+                            defaultFeed: defaultData[0].expect_feed,
+                            defaultPH: defaultData[0].expect_ph,
+                            defaultTemp: defaultData[0].expect_temperture,
+                            switchTopic: defaultData[0].fishbowl_topic
+                        })
+                    });
             })
         })
     }
@@ -68,22 +88,22 @@ export default class listItem extends Component {
         let defaultParameter = [
             {
                 name: '温度:',
-                value: this.state.defaultTemp+'  ℃',
+                value: this.state.defaultTemp + '  ℃',
             }, {
                 name: 'PH:',
-                value: this.state.defaultPH+'  g/ml',
+                value: this.state.defaultPH + '  g/ml',
             }, {
                 name: '喂食次数:',
-                value: this.state.defaultFeed+'  (一日)',
+                value: this.state.defaultFeed + '  (一日)',
             }, {
                 name: '换水时间:',
-                value: this.state.defaultChage+'  (一周)',
+                value: this.state.defaultChage + '  (一周)',
             },
         ];
         return defaultParameter.map((data, index) => {
             return (
                 <View key={index} style={styles.defaultParameterWordItem}>
-                    <Text style={{ color: '#fff',marginRight:5 }} >{data.name}</Text>
+                    <Text style={{ color: '#fff', marginRight: 5 }} >{data.name}</Text>
                     <Text style={{ color: '#fff' }}>{data.value}</Text>
                 </View>
             )
@@ -135,27 +155,28 @@ export default class listItem extends Component {
             )
         })
     }
-    uploadNewParameter = () =>{
+    uploadNewParameter = () => {
         console.log(this.state);
-        let uploadNewParameter = fetch('http://39.105.18.219:3000/uploadNewParameter',{
-            method:'POST',
-            headers:{
-                'Accept':'application/json',
+        let uploadNewParameter = fetch('http://39.105.18.219:3010/uploadNewParameter', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
                 'Content-type': 'application/json'
             },
-            body:JSON.stringify({
-                change:this.state.change,
-                feed:this.state.feed,
-                PH:this.state.PH,
-                temperature:this.state.temperature
+            body: JSON.stringify({
+                fishbowl_id:this.state.fishbowl_id,
+                change: this.state.change,
+                feed: this.state.feed,
+                PH: this.state.PH,
+                temperature: this.state.temperature
             })
         });
-        uploadNewParameter.then(res=>{
-            if(res.ok){
+        uploadNewParameter.then(res => {
+            if (res.ok) {
                 return res.json();
             }
-        }).then(data=>{
-            if(data.success == 1){
+        }).then(data => {
+            if (data.success == 1) {
                 this.setState({
                     defaultChage: this.state.change,
                     defaultFeed: this.state.feed,
@@ -188,17 +209,17 @@ export default class listItem extends Component {
                         <TouchableOpacity style={styles.controlItemBtn} onPress={
                             this.uploadNewParameter
                         }>
-                            <Text style={{ color:'#fff' }}>提交修改</Text>
+                            <Text style={{ color: '#fff' }}>提交修改</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.controlItem}>
                         <TouchableOpacity style={styles.controlItemBtn}>
-                            <Text style={{ color:'#fff' }}>自动控制</Text>
+                            <Text style={{ color: '#fff' }}>自动控制</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.controlItem}>
                         <TouchableOpacity style={styles.controlItemBtn}>
-                            <Text style={{ color:'#fff' }}>切换设备</Text>
+                            <Text style={{ color: '#fff' }}>切换设备</Text>
                         </TouchableOpacity>
                     </View>
 
